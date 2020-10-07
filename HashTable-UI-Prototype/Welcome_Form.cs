@@ -55,6 +55,7 @@ namespace HashTable_UI_Prototype
         {
             // Подготовка невидимой панели
             Welcome_ScreenForMoveControl.BringToFront();
+            // Здесь указывается самый последний элемент (кроме Welcome_ScreenForMoveControl). Чтобы панель просвечивала текст.
             Welcome_ScreenForMoveControl.Parent = WelcomeText_Label;
 
             // Подготовка начальной фразы - она невидима, но насыщается цветом по таймеру
@@ -105,7 +106,10 @@ namespace HashTable_UI_Prototype
 
             Color newColor = Color.FromArgb(r, g, b);
             if (newColor.Equals(preColor))
+            {
                 Welcome_PhraseControl_Timer.Stop();
+                this.PreparationForFormChange();
+            }
             else
                 WelcomeText_Label.ForeColor = newColor;
 
@@ -148,6 +152,45 @@ namespace HashTable_UI_Prototype
             this.isMouseClicked = true;
             this.coordsBeforeMove.X = e.X;
             this.coordsBeforeMove.Y = e.Y;
+        }
+
+        #endregion
+
+        #region Переключение формы
+
+        /// <summary>
+        /// Осуществляет смену форм.
+        /// </summary>
+        private void MoveToNextForm()
+        {
+            HashTableApp_Form nextForm = new HashTableApp_Form(this);
+            this.Hide();
+            nextForm.Show();
+        }
+
+        /// <summary>
+        /// Задержка уже появившегося текста перед сменой формы.
+        /// </summary>
+        private const int PAUSE_BEFORE_FORM_CHANGE = 1000;
+
+        /// <summary>
+        /// Активирует таймер, когда текст полностью появился.
+        /// </summary>
+        private void PreparationForFormChange()
+        {
+            Welcome_BeforeFormChangePause.Interval = PAUSE_BEFORE_FORM_CHANGE;
+            Welcome_BeforeFormChangePause.Start();
+        }
+        
+        /// <summary>
+        /// При срабатывании вызывает метод смены форм. Своего рода реализация задержки.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Welcome_BeforeFormChangePause_Tick(object sender, EventArgs e)
+        {
+            Welcome_BeforeFormChangePause.Stop();
+            this.MoveToNextForm();
         }
 
         #endregion

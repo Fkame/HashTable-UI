@@ -33,6 +33,7 @@
             this.Welcome_ScreenForMoveControl = new System.Windows.Forms.Label();
             this.WelcomeText_Label = new System.Windows.Forms.Label();
             this.Welcome_PhraseControl_Timer = new System.Windows.Forms.Timer(this.components);
+            this.Welcome_BeforeFormChangePause = new System.Windows.Forms.Timer(this.components);
             this.Welcome_BackPanel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -52,9 +53,9 @@
             // 
             this.Welcome_ScreenForMoveControl.BackColor = System.Drawing.Color.Transparent;
             this.Welcome_ScreenForMoveControl.ForeColor = System.Drawing.Color.Transparent;
-            this.Welcome_ScreenForMoveControl.Location = new System.Drawing.Point(-6, 0);
+            this.Welcome_ScreenForMoveControl.Location = new System.Drawing.Point(0, 0);
             this.Welcome_ScreenForMoveControl.Name = "Welcome_ScreenForMoveControl";
-            this.Welcome_ScreenForMoveControl.Size = new System.Drawing.Size(903, 500);
+            this.Welcome_ScreenForMoveControl.Size = new System.Drawing.Size(900, 500);
             this.Welcome_ScreenForMoveControl.TabIndex = 1;
             this.Welcome_ScreenForMoveControl.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Welcome_ScreenForMoveControl_MouseDown);
             this.Welcome_ScreenForMoveControl.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Welcome_ScreenForMoveControl_MouseMove);
@@ -76,6 +77,10 @@
             // Welcome_PhraseControl_Timer
             // 
             this.Welcome_PhraseControl_Timer.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // Welcome_BeforeFormChangePause
+            // 
+            this.Welcome_BeforeFormChangePause.Tick += new System.EventHandler(this.Welcome_BeforeFormChangePause_Tick);
             // 
             // Welcome_Form
             // 
@@ -100,6 +105,7 @@
         private System.Windows.Forms.Label WelcomeText_Label;
         private System.Windows.Forms.Timer Welcome_PhraseControl_Timer;
         private System.Windows.Forms.Label Welcome_ScreenForMoveControl;
+        private System.Windows.Forms.Timer Welcome_BeforeFormChangePause;
     }
 }
 
