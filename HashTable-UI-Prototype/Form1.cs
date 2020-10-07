@@ -53,10 +53,14 @@ namespace HashTable_UI_Prototype
         /// </summary>
         private void preStartConfigureations()
         {
+            // Подготовка невидимой панели
+            Welcome_ScreenForMoveControl.BringToFront();
+            Welcome_ScreenForMoveControl.Parent = WelcomeText_Label;
+
             // Подготовка начальной фразы - она невидима, но насыщается цветом по таймеру
-            this.WelcomeText_Label.ForeColor = Welcome_panel.BackColor;
-            timer1.Interval = TIMER_INTERVAL;
-            timer1.Start();
+            this.WelcomeText_Label.ForeColor = Welcome_BackPanel.BackColor;
+            Welcome_PhraseControl_Timer.Interval = TIMER_INTERVAL;
+            Welcome_PhraseControl_Timer.Start();
         }
 
         /// <summary>
@@ -82,7 +86,7 @@ namespace HashTable_UI_Prototype
             // Начальная задержка перед появлением фразы
             if (PauseBeforeStart > 0)
             {
-                PauseBeforeStart -= timer1.Interval;
+                PauseBeforeStart -= Welcome_PhraseControl_Timer.Interval;
                 return;
             }
 
@@ -101,14 +105,15 @@ namespace HashTable_UI_Prototype
 
             Color newColor = Color.FromArgb(r, g, b);
             if (newColor.Equals(preColor))
-                timer1.Stop();
+                Welcome_PhraseControl_Timer.Stop();
             else
                 WelcomeText_Label.ForeColor = newColor;
 
             speedOfRising++;
         }
-
+        
         #region Перемещение формы при нажатии на неё
+
         /// <summary>
         /// Переменная, указывающая на то, находится ли в данный момент левая кнопка мыши зажатой.
         /// </summary>
@@ -119,7 +124,7 @@ namespace HashTable_UI_Prototype
         /// </summary>
         private (int X, int Y) coordsBeforeMove = (X: 0, Y: 0);
 
-        private void WelcomeText_Label_MouseMove(object sender, MouseEventArgs e)
+        private void Welcome_ScreenForMoveControl_MouseMove(object sender, MouseEventArgs e)
         {
             if (!this.isMouseClicked) return;
 
@@ -133,17 +138,19 @@ namespace HashTable_UI_Prototype
             this.Location = windowPosition;
         }
 
-        private void WelcomeText_Label_MouseUp(object sender, MouseEventArgs e)
+        private void Welcome_ScreenForMoveControl_MouseUp(object sender, MouseEventArgs e)
         {
             this.isMouseClicked = false;
         }
 
-        private void WelcomeText_Label_MouseDown(object sender, MouseEventArgs e)
+        private void Welcome_ScreenForMoveControl_MouseDown(object sender, MouseEventArgs e)
         {
             this.isMouseClicked = true;
             this.coordsBeforeMove.X = e.X;
             this.coordsBeforeMove.Y = e.Y;
         }
+
         #endregion
+
     }
 }
