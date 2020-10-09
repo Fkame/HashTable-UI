@@ -29,38 +29,42 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainMenu));
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.Header_Panel = new System.Windows.Forms.Panel();
             this.btn_HelpPointer = new System.Windows.Forms.PictureBox();
             this.btn_Help = new System.Windows.Forms.PictureBox();
             this.btn_Header = new System.Windows.Forms.Label();
-            this.panel3 = new System.Windows.Forms.Panel();
+            this.Logo_Panel = new System.Windows.Forms.Panel();
             this.btn_Exit = new System.Windows.Forms.PictureBox();
-            this.panel2 = new System.Windows.Forms.Panel();
+            this.Menu_Panel = new System.Windows.Forms.Panel();
             this.btn_StoredData = new System.Windows.Forms.Button();
             this.btn_Visualisation = new System.Windows.Forms.Button();
             this.btn_Searching = new System.Windows.Forms.Button();
             this.btn_UploadData = new System.Windows.Forms.Button();
             this.btn_Home = new System.Windows.Forms.Button();
-            this.panel1.SuspendLayout();
+            this.ChildForm_Panel = new System.Windows.Forms.Panel();
+            this.Header_Panel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btn_HelpPointer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btn_Help)).BeginInit();
-            this.panel3.SuspendLayout();
+            this.Logo_Panel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btn_Exit)).BeginInit();
-            this.panel2.SuspendLayout();
+            this.Menu_Panel.SuspendLayout();
             this.SuspendLayout();
             // 
-            // panel1
+            // Header_Panel
             // 
-            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(77)))), ((int)(((byte)(178)))), ((int)(((byte)(172)))));
-            this.panel1.Controls.Add(this.btn_HelpPointer);
-            this.panel1.Controls.Add(this.btn_Help);
-            this.panel1.Controls.Add(this.btn_Header);
-            this.panel1.Controls.Add(this.panel3);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(900, 70);
-            this.panel1.TabIndex = 0;
+            this.Header_Panel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(77)))), ((int)(((byte)(178)))), ((int)(((byte)(172)))));
+            this.Header_Panel.Controls.Add(this.btn_HelpPointer);
+            this.Header_Panel.Controls.Add(this.btn_Help);
+            this.Header_Panel.Controls.Add(this.btn_Header);
+            this.Header_Panel.Controls.Add(this.Logo_Panel);
+            this.Header_Panel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.Header_Panel.Location = new System.Drawing.Point(0, 0);
+            this.Header_Panel.Name = "Header_Panel";
+            this.Header_Panel.Size = new System.Drawing.Size(900, 70);
+            this.Header_Panel.TabIndex = 0;
+            this.Header_Panel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Header_Panel_MouseDown);
+            this.Header_Panel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Header_Panel_MouseMove);
+            this.Header_Panel.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Header_Panel_MouseUp);
             // 
             // btn_HelpPointer
             // 
@@ -98,15 +102,15 @@
             this.btn_Header.TabIndex = 3;
             this.btn_Header.Text = "HOME";
             // 
-            // panel3
+            // Logo_Panel
             // 
-            this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(59)))));
-            this.panel3.Controls.Add(this.btn_Exit);
-            this.panel3.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel3.Location = new System.Drawing.Point(0, 0);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(150, 70);
-            this.panel3.TabIndex = 2;
+            this.Logo_Panel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(59)))));
+            this.Logo_Panel.Controls.Add(this.btn_Exit);
+            this.Logo_Panel.Dock = System.Windows.Forms.DockStyle.Left;
+            this.Logo_Panel.Location = new System.Drawing.Point(0, 0);
+            this.Logo_Panel.Name = "Logo_Panel";
+            this.Logo_Panel.Size = new System.Drawing.Size(150, 70);
+            this.Logo_Panel.TabIndex = 2;
             // 
             // btn_Exit
             // 
@@ -120,20 +124,22 @@
             this.btn_Exit.TabIndex = 2;
             this.btn_Exit.TabStop = false;
             this.btn_Exit.Click += new System.EventHandler(this.btn_Exit_Click);
+            this.btn_Exit.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btn_Exit_MouseDown);
+            this.btn_Exit.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btn_Exit_MouseUp);
             // 
-            // panel2
+            // Menu_Panel
             // 
-            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(47)))), ((int)(((byte)(79)))));
-            this.panel2.Controls.Add(this.btn_StoredData);
-            this.panel2.Controls.Add(this.btn_Visualisation);
-            this.panel2.Controls.Add(this.btn_Searching);
-            this.panel2.Controls.Add(this.btn_UploadData);
-            this.panel2.Controls.Add(this.btn_Home);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel2.Location = new System.Drawing.Point(0, 70);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(150, 430);
-            this.panel2.TabIndex = 1;
+            this.Menu_Panel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(47)))), ((int)(((byte)(79)))));
+            this.Menu_Panel.Controls.Add(this.btn_StoredData);
+            this.Menu_Panel.Controls.Add(this.btn_Visualisation);
+            this.Menu_Panel.Controls.Add(this.btn_Searching);
+            this.Menu_Panel.Controls.Add(this.btn_UploadData);
+            this.Menu_Panel.Controls.Add(this.btn_Home);
+            this.Menu_Panel.Dock = System.Windows.Forms.DockStyle.Left;
+            this.Menu_Panel.Location = new System.Drawing.Point(0, 70);
+            this.Menu_Panel.Name = "Menu_Panel";
+            this.Menu_Panel.Size = new System.Drawing.Size(150, 430);
+            this.Menu_Panel.TabIndex = 1;
             // 
             // btn_StoredData
             // 
@@ -190,6 +196,7 @@
             this.btn_UploadData.TabIndex = 3;
             this.btn_UploadData.Text = "Upload data";
             this.btn_UploadData.UseVisualStyleBackColor = true;
+            this.btn_UploadData.Click += new System.EventHandler(this.btn_UploadData_Click);
             // 
             // btn_Home
             // 
@@ -206,35 +213,43 @@
             this.btn_Home.UseVisualStyleBackColor = true;
             this.btn_Home.Click += new System.EventHandler(this.btn_Home_Click);
             // 
+            // ChildForm_Panel
+            // 
+            this.ChildForm_Panel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ChildForm_Panel.Location = new System.Drawing.Point(150, 70);
+            this.ChildForm_Panel.Name = "ChildForm_Panel";
+            this.ChildForm_Panel.Size = new System.Drawing.Size(750, 430);
+            this.ChildForm_Panel.TabIndex = 2;
+            // 
             // MainMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Beige;
             this.ClientSize = new System.Drawing.Size(900, 500);
-            this.Controls.Add(this.panel2);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.ChildForm_Panel);
+            this.Controls.Add(this.Menu_Panel);
+            this.Controls.Add(this.Header_Panel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "MainMenu";
             this.Text = "HashTable App";
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.HashTableApp_Form_FormClosed);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainMenu_FormClosed);
             this.Load += new System.EventHandler(this.MainMenu_Load);
-            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.HashTableApp_Form_KeyUp);
-            this.panel1.ResumeLayout(false);
+            this.Header_Panel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.btn_HelpPointer)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btn_Help)).EndInit();
-            this.panel3.ResumeLayout(false);
+            this.Logo_Panel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.btn_Exit)).EndInit();
-            this.panel2.ResumeLayout(false);
+            this.Menu_Panel.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Panel Header_Panel;
+        private System.Windows.Forms.Panel Logo_Panel;
+        private System.Windows.Forms.Panel Menu_Panel;
         private System.Windows.Forms.Button btn_Home;
         private System.Windows.Forms.Label btn_Header;
         private System.Windows.Forms.Button btn_StoredData;
@@ -244,5 +259,6 @@
         private System.Windows.Forms.PictureBox btn_Help;
         private System.Windows.Forms.PictureBox btn_HelpPointer;
         private System.Windows.Forms.PictureBox btn_Exit;
+        private System.Windows.Forms.Panel ChildForm_Panel;
     }
 }

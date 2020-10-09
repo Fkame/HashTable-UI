@@ -46,11 +46,41 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MainMenu_MenuButtons.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="MainMenu.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="MainMenu.Designer.cs">
       <DependentUpon>MainMenu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SubForms\Home_Form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SubForms\Home_Form.Designer.cs">
+      <DependentUpon>Home_Form.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SubForms\UploadDatas\AUploadData.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SubForms\UploadDatas\UploadData_FromFile.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SubForms\UploadDatas\UploadData_FromFile.Designer.cs">
+      <DependentUpon>UploadData_FromFile.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SubForms\UploadDatas\UploadData_Main.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SubForms\UploadDatas\UploadData_Main.Designer.cs">
+      <DependentUpon>UploadData_Main.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SubForms\UploadDatas\UploadData_Manually.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SubForms\UploadDatas\UploadData_Manually.Designer.cs">
+      <DependentUpon>UploadData_Manually.cs</DependentUpon>
     </Compile>
     <Compile Include="Welcome_Form.cs">
       <SubType>Form</SubType>
@@ -62,6 +92,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="MainMenu.resx">
       <DependentUpon>MainMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SubForms\Home_Form.resx">
+      <DependentUpon>Home_Form.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Welcome_Form.resx">
       <DependentUpon>Welcome_Form.cs</DependentUpon>

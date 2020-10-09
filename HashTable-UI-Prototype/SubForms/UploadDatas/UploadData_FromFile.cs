@@ -8,18 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace HashTable_UI_Prototype.SubForms
+namespace HashTable_UI_Prototype.SubForms.UploadDatas
 {
-    public partial class Home_Form : Form
+    public partial class UploadData_FromFile: AUploadData
     {
-        public Home_Form()
+        public UploadData_FromFile()
         {
             InitializeComponent();
         }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public static Color HIGHLIGHT_COLOR = Color.FromArgb(77,178,172);
     }
 }

@@ -1,14 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 using HashTable_UI_Prototype.SubForms;
+using HashTable_UI_Prototype.SubForms.UploadDatas;
 
 namespace HashTable_UI_Prototype
 {
@@ -30,35 +25,101 @@ namespace HashTable_UI_Prototype
         }
 
         /// <summary>
-        /// Список с ссылками на открытые мини-окна, которые нужно закрыть перед закрытием этой формы
+        /// Стандартный цвет для невыделенного элемента.
         /// </summary>
-        private List<Form> windows = new List<Form>();
+        private static Color NOT_SELECTED_BUTTON_COLOR = Color.FromArgb(48, 47, 79);
 
         /// <summary>
-        /// Какая форма в данный момент показывается.
+        /// Переменная используется для того, чтобы свернуть или закрыть предыдущую форму.
         /// </summary>
-        private Form activeNowForm;
+        private Form activeForm;
 
         /// <summary>
-        /// Окошко, которое выводит текст и объясняет содержимое той или иной формы. Представляет собой модульное окно с текстом.
+        /// 
         /// </summary>
-        private Form helpWindow;
+        private Home_Form homeForm;
 
         /// <summary>
-        /// Действия при загрузке формы.
+        /// 
+        /// </summary>
+        private AUploadData uploadDataForm;
+
+        /// <summary>
+        /// Действия при загрузке формы:
+        /// 1. Нужно создать "домашнюю" форму и поместить её на панель.
+        /// 2. Нужно перекрасить в соответствующие цвета кнопку и заголовок.
+        /// 3. Нужно скрыть до загрузки данных 3 последние кнопки
         /// </summary>
         /// <param name="sender">Указатель на объект, вызывавший событие.</param>
         /// <param name="e">Данные о событии.</param>
         private void MainMenu_Load(object sender, EventArgs e)
         {
-            Form home = new Home_Form();
-            this.windows.Add(home);
-            this.activeNowForm = home;
+            homeForm = new Home_Form();
+            btn_Home.BackColor = Home_Form.HIGHLIGHT_COLOR;
+            Header_Panel.BackColor = Home_Form.HIGHLIGHT_COLOR;
+
+            activeForm = homeForm;
+            this.DoFillActiveInPanelStaff();
+
+            btn_Searching.Enabled = false;
+            btn_Visualisation.Enabled = false;
+            btn_StoredData.Enabled = false;
         }
 
-        private void HighlightButtonOfActiveForm()
+        /// <summary>
+        /// 
+        /// </summary>
+        private void DoFillActiveInPanelStaff()
         {
+            activeForm.TopLevel = false;
+            activeForm.Dock = DockStyle.Fill;
+            ChildForm_Panel.Controls.Add(activeForm);
+            ChildForm_Panel.Tag = activeForm;
+            activeForm.BringToFront();
+            activeForm.Show();
+        }
+  
 
+        #region Кнопки закрытия и событие закрытия формы
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btn_Exit_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btn_Exit_MouseDown(object sender, MouseEventArgs e)
+        {
+            Size preS = this.btn_Exit.Size;
+            Point preL = this.btn_Exit.Location;
+
+            preS.Width -= 10;
+            preS.Height -= 10;
+
+            preL.X += 5;
+            preL.Y += 5;
+
+            this.btn_Exit.Size = preS;
+            this.btn_Exit.Location = preL;
+        }
+
+        private void btn_Exit_MouseUp(object sender, MouseEventArgs e)
+        {
+            Size preS = this.btn_Exit.Size;
+            Point preL = this.btn_Exit.Location;
+
+            preS.Width += 10;
+            preS.Height += 10;
+
+            preL.X -= 5;
+            preL.Y -= 5;
+
+            this.btn_Exit.Size = preS;
+            this.btn_Exit.Location = preL;
         }
 
         /// <summary>
@@ -66,29 +127,56 @@ namespace HashTable_UI_Prototype
         /// </summary>
         /// <param name="sender">Указатель на объект, вызывавший событие.</param>
         /// <param name="e">Данные о событии.</param>
-        private void HashTableApp_Form_FormClosed(object sender, FormClosedEventArgs e)
+        private void MainMenu_FormClosed(object sender, FormClosedEventArgs e)
         {
+            if (homeForm != null) homeForm.Close();
+            // ...
+
             this.weclomeForm.Close();
         }
 
+        #endregion
+
+        #region Перемещение окна
+
         /// <summary>
-        /// Закрытие формы при нажатии Escape.
+        /// Переменная, указывающая на то, находится ли в данный момент левая кнопка мыши зажатой.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void HashTableApp_Form_KeyUp(object sender, KeyEventArgs e)
+        private bool isMouseClicked = false;
+
+        /// <summary>
+        /// Координаты мыши до начала перемещения. Нужны для облегченного измерения сдвига.
+        /// </summary>
+        private (int X, int Y) coordsBeforeMove = (X: 0, Y: 0);
+
+        private void Header_Panel_MouseUp(object sender, MouseEventArgs e)
         {
-            // Закрытие формы на клавишу Escape
-            if (e.KeyCode == Keys.Escape) this.Close();
+            this.isMouseClicked = false;
         }
 
-        private void btn_Home_Click(object sender, EventArgs e)
+        private void Header_Panel_MouseMove(object sender, MouseEventArgs e)
         {
+            if (!this.isMouseClicked) return;
+
+            int changeOX = e.X - coordsBeforeMove.X;
+            int changeOY = e.Y - coordsBeforeMove.Y;
+
+            Point windowPosition = this.Location;
+            windowPosition.X = windowPosition.X + changeOX;
+            windowPosition.Y = windowPosition.Y + changeOY;
+
+            this.Location = windowPosition;
         }
 
-        private void btn_Exit_Click(object sender, EventArgs e)
+        private void Header_Panel_MouseDown(object sender, MouseEventArgs e)
         {
-            this.Close();
+            this.isMouseClicked = true;
+            this.coordsBeforeMove.X = e.X;
+            this.coordsBeforeMove.Y = e.Y;
         }
+
+
+        #endregion
+
     }
 }
