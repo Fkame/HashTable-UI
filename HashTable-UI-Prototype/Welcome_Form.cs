@@ -163,7 +163,7 @@ namespace HashTable_UI_Prototype
         /// </summary>
         private void MoveToNextForm()
         {
-            HashTableApp_Form nextForm = new HashTableApp_Form(this);
+            MainMenu nextForm = new MainMenu(this);
             this.Hide();
             nextForm.Show();
         }
