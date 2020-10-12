@@ -23,7 +23,7 @@ namespace HashTableApp.HashTableStructure
         /// <summary>
         /// 
         /// </summary>
-        private string[] values;
+        private Cell[] values;
 
         /// <summary>
         /// Количество элементов в массиве в текущий момент.
@@ -33,7 +33,7 @@ namespace HashTableApp.HashTableStructure
         /// <summary>
         /// Количество элементов в массиве в текущий момент.
         /// </summary>
-        public int HashMapSize 
+        public int HashTableFullness
         { 
             get { return size; }
         }
@@ -47,7 +47,7 @@ namespace HashTableApp.HashTableStructure
             ReHashFunc = f2;
             this.size = 0;
             int maxArraySize = HashFunc.GetMaxValue();
-            this.values = new string[maxArraySize];
+            this.values = new Cell[maxArraySize];
         }
 
         /// <summary>
@@ -64,13 +64,15 @@ namespace HashTableApp.HashTableStructure
             if (this.IsExists(word)) return -1;
 
             int index = HashFunc.CreateHash(word);
+
             int lvlOfRehash = 1;
             while (values[index] != null)
             {
                 index = ReHashFunc.Rehash(index, lvlOfRehash);
                 lvlOfRehash++;
             }
-            values[index] = word;
+
+            values[index] = new Cell(word, --lvlOfRehash);
 
             this.size++;
             return index;
@@ -83,12 +85,12 @@ namespace HashTableApp.HashTableStructure
         /// <returns>Хэш, по которому хранилось значение.</returns>
         public int Remove(string word)
         {
-            if (this.IsEmpty()) return -1;
             if (!this.IsExists(word)) return -1;
 
             int index = HashFunc.CreateHash(word);
+
             int lvlOfRehash = 1;
-            while (values[index] != word)
+            while (values[index].Value != word)
             {
                 index = ReHashFunc.Rehash(index, lvlOfRehash);
                 lvlOfRehash++;
@@ -105,18 +107,19 @@ namespace HashTableApp.HashTableStructure
         /// </summary>
         /// <param name="word"></param>
         /// <returns></returns>
-        public int GetHash(string word, bool isRehashIncude)
+        public int GetHash(string word)
         {
+            if (!IsExists(word)) return -1;
+            
             int index = HashFunc.CreateHash(word);
-            if (values[index] == null) return -1;
-            if (!isRehashIncude) return index;
-
+            
             int lvlOfRehash = 1;
-            while (values[index] != word)
+            while (values[index].Value != word)
             {
                 index = ReHashFunc.Rehash(index, lvlOfRehash);
                 lvlOfRehash++;
             }
+            
             return index;
         }
 
@@ -127,22 +130,102 @@ namespace HashTableApp.HashTableStructure
         /// <returns>Существует ли элемент в хэш-таблице.</returns>
         public bool IsExists(string word)
         {
-            int index = HashFunc.CreateHash(word);
-            if (values[index] == null) return false;
+            if (this.IsEmpty()) return false;
 
-            if (values[index] == word) return true;
-
+            int index = HashFunc.CreateHash(word); 
+    
             int startIndex = index;
             int lvlOfRehash = 1;
-            while (values[index] != null & index != startIndex) 
+            while (values[index] != null & (index != startIndex | lvlOfRehash == 1)) 
             {
-                if (values[index] == word) 
+                if (values[index].Value == word) 
                     return true;
                 index = ReHashFunc.Rehash(index, lvlOfRehash);
                 lvlOfRehash = (lvlOfRehash + 1) % HashFunc.GetMaxValue();
             }
 
-            return false;
+            return false;          
+        }
+
+        public bool IsValueStoredAsRehash(string word)
+        {
+            if (!IsExists(word)) return false;
+
+            int index = HashFunc.CreateHash(word);
+            if (values[index].Value == word) 
+                return false;
+            return true;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="word"></param>
+        /// <returns></returns>
+        public int GetRehashLevel(string word)
+        {
+            if (!this.IsExists(word)) return -1;
+
+            int index = HashFunc.CreateHash(word);
+
+            int lvlOfRehash = 1;
+            while (values[index].Value != word)
+            {
+                index = ReHashFunc.Rehash(index, lvlOfRehash);
+                lvlOfRehash++;
+            }
+
+            return values[index].LevelOfHash;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public int GetMaxRehashLevel()
+        {
+            if (this.IsEmpty()) return -1;
+
+            int maxR = values[0].LevelOfHash;
+            foreach (Cell c in values)
+            {
+                if (c == null) continue;
+                if (c.LevelOfHash > maxR) maxR = c.LevelOfHash;
+            }
+
+            return maxR;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public int GetAmountOfNotRehashedValues()
+        {
+            if (this.IsEmpty()) return -1;
+            int count = 0;
+            foreach (Cell c in values)
+            {
+                if (c == null) continue;
+                if (c.LevelOfHash == 0) count++;
+            }
+            return count;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public int GetAmountOfRehashedValues()
+        {
+            if (this.IsEmpty()) return -1;
+            int count = 0;
+            foreach (Cell c in values)
+            {
+                if (c == null) continue;
+                if (c.LevelOfHash > 0) count++;
+            }
+            return count;
         }
 
         /// <summary>
@@ -172,7 +255,14 @@ namespace HashTableApp.HashTableStructure
             string[] copy = new string[values.Length];
             for (int i = 0; i < values.Length; i++)
             {
-                copy[i] = values[i];
+                try
+                {
+                    copy[i] = values[i].Value;
+                }
+                catch (NullReferenceException e)
+                {
+                    copy[i] = string.Empty;
+                }
             }
             return copy;
         }
@@ -187,7 +277,7 @@ namespace HashTableApp.HashTableStructure
             int j = 0;
             for (int i = 0; i < values.Length; i++)
             {
-                if (values[i] != null) partCopy[j++] = values[i];
+                if (values[i] != null) partCopy[j++] = values[i].Value;
             }
 
             return partCopy;
@@ -202,26 +292,25 @@ namespace HashTableApp.HashTableStructure
             this.size = 0;
         }
 
-        public int LevelOfRehash(string value)
+        /// <summary>
+        /// 
+        /// </summary>
+        internal class Cell
         {
-            // Если значения не существует - выход из метода
-            if (!IsExists(value)) return -1;
+            public string Value { get; private set; }
 
-            // Если значение не было решэшировано - выход из метода
-            int index = HashFunc.CreateHash(value);
-            if (values[index].Equals(value)) return 0;
+            public int LevelOfHash { get; set; }
 
-            int startIndex = index;
-            int lvlOfRehash = 1;
-
-            // Мы ведь уверены, что оно есть (благодаря вызову IsExists()), значит можно не волноваться о бесконечном цикле
-            while (true)
+            public Cell (string value)
             {
-                if (values[index] == value) 
-                    return lvlOfRehash;
+                Value = value;
+                LevelOfHash = 0;
+            }
 
-                index = ReHashFunc.Rehash(index, lvlOfRehash);
-                lvlOfRehash = (lvlOfRehash + 1) % HashFunc.GetMaxValue();
+            public Cell(string value, int lvl)
+            {
+                Value = value;
+                LevelOfHash = lvl;
             }
         }
     }

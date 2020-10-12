@@ -16,7 +16,7 @@ namespace HashTableApp.HashTableStructure.ReHashFunctions
         /// </summary>
         /// <param name="hash">Входящий хэш, который нужно рехэшировать. Представляет собой число.</param>
         /// <param name="lvlOfRehash">Указывает, который раз происходит рехэширование, т.е. это число - 
-        /// количество коллизий с данным хэшем. Начинается с 1.</param>
+        /// количество коллизий с данным хэшем. Начинается с 0.</param>
         /// <returns>Рехэшированное число.</returns>
         int Rehash(int hash, int lvlOfRehash);
     }

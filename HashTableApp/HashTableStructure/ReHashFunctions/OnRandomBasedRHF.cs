@@ -53,7 +53,8 @@ namespace HashTableApp.HashTableStructure.ReHashFunctions
         /// <inheritdoc/>>
         public int Rehash(int hash, int lvlOfRehash)
         {
-            if (((lvlOfRehash < 1) || (lvlOfRehash >= this.maxValueOfHashFunction)) || hash < 0) 
+            if (lvlOfRehash == 0) return hash;
+            if (((lvlOfRehash < 0) || (lvlOfRehash >= this.maxValueOfHashFunction)) || hash < 0) 
                 throw new ArgumentOutOfRangeException();
 
             return (hash + pseudoNumbersArray[lvlOfRehash - 1]) % this.maxValueOfHashFunction;

@@ -53,6 +53,7 @@ namespace HashTableApp.HashTableStructure.ReHashFunctions
         /// <inheritdoc/>
         public int Rehash(int hash, int lvlOfRehash)
         {
+            if (lvlOfRehash == 0) return hash;
             return (hash + this.stepValue * lvlOfRehash) % this.maxValueOfHashFunction;
         }
 

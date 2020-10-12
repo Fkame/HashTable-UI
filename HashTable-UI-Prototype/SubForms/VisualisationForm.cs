@@ -24,7 +24,7 @@ namespace HashTable_UI_Prototype.SubForms
 
         private void VisualisationForm_Shown(object sender, EventArgs e)
         {
-
+            SetInitialValues();
         }
 
         /// <summary>
@@ -32,13 +32,29 @@ namespace HashTable_UI_Prototype.SubForms
         /// </summary>
         private void SetInitialValues()
         {
-            // Поля текста
+            var data = GetAndSetStatistic();
+            DrawVisualisation(data);
+            DrawHistogram(data);
+        }
+
+        private void DrawVisualisation((int full, int notRe, int re) data)
+        {
+
+        }
+
+        private void DrawHistogram((int full, int notRe, int re) data)
+        {
+
+        }
+
+        private (int FullAmount, int NotReashed, int Rehashed) GetAndSetStatistic()
+        {
+            // Поле текста
             StringBuilder text = new StringBuilder("- - - Here will be statistic of searching - - -\n");
 
-
             // Amount of identificators
-            text.Append("Amount of identificators");
-            text.Append(parentForm.HashTable.HashMapSize);
+            text.Append("Amount of identificators = ");
+            text.Append(parentForm.HashTable.HashTableFullness);
             text.Append("\n");
 
             // Max len
@@ -55,20 +71,33 @@ namespace HashTable_UI_Prototype.SubForms
             text.Append("\n");
 
             // Amount of collisions
+            int rehashCount = parentForm.HashTable.GetAmountOfRehashedValues();
             text.Append("Amount of collisions = ");
+            text.Append(rehashCount);
+            text.Append(" [Red]\n");
+
+            // max rehash value
+            text.Append("Maximum rehash level = ");
+            text.Append(parentForm.HashTable.GetMaxRehashLevel());
             text.Append("\n");
 
             // Amount of Empty
             text.Append("Amount of Empty = ");
             string[] allValues = parentForm.HashTable.GetFullHashTableAsArray();
-            text.Append(allValues.Length - values.Length);
-            text.Append("[Grey]\n");
+            int emptyCount = allValues.Length - values.Length;
+            text.Append(emptyCount);
+            text.Append(" [Grey]\n");
 
-            // Amount of fill
-            text.Append("Amount of fill = ");
-            text.Append("\n");
+            // Amount of not rehashed values
+            int notRehashCount = parentForm.HashTable.GetAmountOfNotRehashedValues();
+            text.Append("Amount of not rehashed values = ");
+            text.Append(notRehashCount);
+            text.Append(" [Green]\n");
 
             Statistic.Text = text.ToString();
+
+            int fullCount = emptyCount + rehashCount + notRehashCount;
+            return (fullCount, notRehashCount, rehashCount);
         }
 
         #region Обводка границ вокруг элемента

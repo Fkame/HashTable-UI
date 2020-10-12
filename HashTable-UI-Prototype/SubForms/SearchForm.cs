@@ -93,7 +93,7 @@ namespace HashTable_UI_Prototype.SubForms
 
             // Хэш
             analysis.Append("Hash of word = ");
-            analysis.Append(parentForm.HashTable.GetHash(value, false));
+            analysis.Append(parentForm.HashTable.GetHash(value));
             analysis.Append("\n");
 
             // Типы хэшей
@@ -104,15 +104,15 @@ namespace HashTable_UI_Prototype.SubForms
             analysis.Append("\n");
 
             // Является ли значение рэхешем
-            int lvlOfRehash = parentForm.HashTable.LevelOfRehash(value);
+            bool isRehash = parentForm.HashTable.IsValueStoredAsRehash(value);
 
             analysis.Append("Is rehashed = "); 
-            analysis.Append(lvlOfRehash > 0);
+            analysis.Append(isRehash);
             analysis.Append("\n");
 
             // Количество рэхешей для записи слова
             analysis.Append("Amount of rehashes = ");
-            analysis.Append(lvlOfRehash);
+            analysis.Append(parentForm.HashTable.GetRehashLevel(value));
             analysis.Append("\n");
 
             // Время, затраченное на поиск слова

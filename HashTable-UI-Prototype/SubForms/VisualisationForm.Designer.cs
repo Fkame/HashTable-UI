@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.VisualCells_PB = new System.Windows.Forms.PictureBox();
             this.Gistogram_Panel = new System.Windows.Forms.Panel();
             this.Statistic = new System.Windows.Forms.RichTextBox();
@@ -62,23 +62,24 @@
             this.Statistic.Font = new System.Drawing.Font("Ubuntu", 12F);
             this.Statistic.Location = new System.Drawing.Point(388, 266);
             this.Statistic.Name = "Statistic";
+            this.Statistic.ReadOnly = true;
             this.Statistic.Size = new System.Drawing.Size(350, 152);
             this.Statistic.TabIndex = 2;
             this.Statistic.Text = "";
             // 
             // Gistogram_Chart
             // 
-            chartArea3.Name = "ChartArea1";
-            this.Gistogram_Chart.ChartAreas.Add(chartArea3);
+            chartArea4.Name = "ChartArea1";
+            this.Gistogram_Chart.ChartAreas.Add(chartArea4);
             this.Gistogram_Chart.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend3.Name = "Legend1";
-            this.Gistogram_Chart.Legends.Add(legend3);
+            legend4.Name = "Legend1";
+            this.Gistogram_Chart.Legends.Add(legend4);
             this.Gistogram_Chart.Location = new System.Drawing.Point(0, 0);
             this.Gistogram_Chart.Name = "Gistogram_Chart";
-            series3.ChartArea = "ChartArea1";
-            series3.Legend = "Legend1";
-            series3.Name = "Series1";
-            this.Gistogram_Chart.Series.Add(series3);
+            series4.ChartArea = "ChartArea1";
+            series4.Legend = "Legend1";
+            series4.Name = "Series1";
+            this.Gistogram_Chart.Series.Add(series4);
             this.Gistogram_Chart.Size = new System.Drawing.Size(350, 222);
             this.Gistogram_Chart.TabIndex = 0;
             this.Gistogram_Chart.Text = "chart1";
