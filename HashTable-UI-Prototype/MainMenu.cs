@@ -3,7 +3,6 @@ using System.Drawing;
 using System.Windows.Forms;
 
 using HashTable_UI_Prototype.SubForms;
-using HashTable_UI_Prototype.SubForms.UploadDatas;
 
 namespace HashTable_UI_Prototype
 {
@@ -35,14 +34,14 @@ namespace HashTable_UI_Prototype
         private Form activeForm;
 
         /// <summary>
-        /// 
+        /// Ссылка на вложенную форму вкладки "Home"
         /// </summary>
         private Home_Form homeForm;
 
         /// <summary>
-        /// 
+        /// Ссылка на вложенную форму вкладки "Upload data"
         /// </summary>
-        private AUploadData uploadDataForm;
+        private UploadData_Form uploadDataForm;
 
         /// <summary>
         /// Действия при загрузке формы:
@@ -61,13 +60,25 @@ namespace HashTable_UI_Prototype
             activeForm = homeForm;
             this.DoFillActiveInPanelStaff();
 
+            BlockMainButtons();
+        }
+
+        public void BlockMainButtons()
+        {
             btn_Searching.Enabled = false;
             btn_Visualisation.Enabled = false;
             btn_StoredData.Enabled = false;
         }
 
+        public void UnlockMainButtons()
+        {
+            btn_Searching.Enabled = true;
+            btn_Visualisation.Enabled = true;
+            btn_StoredData.Enabled = true;
+        }
+
         /// <summary>
-        /// 
+        /// Метод, который открывает активную форму в мини-окне панели
         /// </summary>
         private void DoFillActiveInPanelStaff()
         {

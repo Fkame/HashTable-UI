@@ -1,7 +1,6 @@
 ﻿using System;
 
 using HashTable_UI_Prototype.SubForms;
-using HashTable_UI_Prototype.SubForms.UploadDatas;
 
 namespace HashTable_UI_Prototype
 {
@@ -54,15 +53,15 @@ namespace HashTable_UI_Prototype
             // Если сейчас открыта другая вкладка, тогда проверяем, была ли открыта форма загрузки данных
             // Если не была - создаём её
             if (uploadDataForm == null) 
-                uploadDataForm = new UploadData_Main();          
+                uploadDataForm = new UploadData_Form(this);          
 
             // Если открыта другая вкладка и у нас есть созданная форма загрузки - проверяем нужно ли скрыть текущую
             if (activeForm != null)
                 activeForm.Hide();
 
             ClearAllButtons();
-            btn_UploadData.BackColor = AUploadData.HIGHLIGHT_COLOR;
-            Header_Panel.BackColor = AUploadData.HIGHLIGHT_COLOR;
+            btn_UploadData.BackColor = UploadData_Form.HIGHLIGHT_COLOR;
+            Header_Panel.BackColor = UploadData_Form.HIGHLIGHT_COLOR;
 
             activeForm = uploadDataForm;
             this.DoFillActiveInPanelStaff();
