@@ -127,11 +127,15 @@ namespace HashTableApp.HashTableStructure
             int index = HashFunc.CreateHash(word);
             if (values[index] == null) return false;
 
+            if (values[index] == word) return true;
+
+            int startIndex = index;
             int lvlOfRehash = 1;
-            while (values[index] != null) 
+            while (values[index] != null & index != startIndex) 
             {
-                if (values[index] == word) return true;
-                    index = ReHashFunc.Rehash(index, lvlOfRehash);
+                if (values[index] == word) 
+                    return true;
+                index = ReHashFunc.Rehash(index, lvlOfRehash);
                 lvlOfRehash = (lvlOfRehash + 1) % HashFunc.GetMaxValue();
             }
 
@@ -162,7 +166,28 @@ namespace HashTableApp.HashTableStructure
         /// <returns></returns>
         public string[] GetFullHashTableAsArray()
         {
-            return values;
+            string[] copy = new string[values.Length];
+            for (int i = 0; i < values.Length; i++)
+            {
+                copy[i] = values[i];
+            }
+            return copy;
+        }
+
+        /// <summary>
+        /// Выгрузка хэш-таблицы
+        /// </summary>
+        /// <returns></returns>
+        public string[] GetOnlyNotNullValues()
+        {
+            string[] partCopy = new string[this.size];
+            int j = 0;
+            for (int i = 0; i < values.Length; i++)
+            {
+                if (values[i] != null) partCopy[j++] = values[i];
+            }
+
+            return partCopy;
         }
 
         /// <summary>
@@ -172,6 +197,29 @@ namespace HashTableApp.HashTableStructure
         {
             Array.Clear(values, 0, values.Length);
             this.size = 0;
+        }
+
+        public int LevelOfRehash(string value)
+        {
+            // Если значения не существует - выход из метода
+            if (!IsExists(value)) return -1;
+
+            // Если значение не было решэшировано - выход из метода
+            int index = HashFunc.CreateHash(value);
+            if (values[index].Equals(value)) return 0;
+
+            int startIndex = index;
+            int lvlOfRehash = 1;
+
+            // Мы ведь уверены, что оно есть (благодаря вызову IsExists()), значит можно не волноваться о бесконечном цикле
+            while (true)
+            {
+                if (values[index] == value) 
+                    return lvlOfRehash;
+
+                index = ReHashFunc.Rehash(index, lvlOfRehash);
+                lvlOfRehash = (lvlOfRehash + 1) % HashFunc.GetMaxValue();
+            }
         }
     }
 }

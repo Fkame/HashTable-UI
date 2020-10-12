@@ -39,7 +39,7 @@ namespace HashTable_UI_Prototype
         }
 
         /// <summary>
-        /// 
+        /// Действия при нажатии на кнопку "Upload data"
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -64,6 +64,32 @@ namespace HashTable_UI_Prototype
             Header_Panel.BackColor = UploadData_Form.HIGHLIGHT_COLOR;
 
             activeForm = uploadDataForm;
+            this.DoFillActiveInPanelStaff();
+        }
+
+        /// <summary>
+        /// Действия при нажатии на кнопку "Searching"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btn_Searching_Click(object sender, EventArgs e)
+        {
+            // Если вкладка уже открыта - ничего не делаем
+            if (this.activeForm == searchForm) return;
+
+            // Если вкладка не была прежде ни разу открыта - создаём её
+            if (searchForm == null)
+                searchForm = new SearchForm(this);
+
+            // Если открыта вдругая вкладка - скрываем её
+            if (activeForm != null)
+                activeForm.Hide();
+
+            ClearAllButtons();
+            btn_Searching.BackColor = SearchForm.HIGHLIGHT_COLOR;
+            Header_Panel.BackColor = SearchForm.HIGHLIGHT_COLOR;
+
+            activeForm = searchForm;
             this.DoFillActiveInPanelStaff();
         }
     }

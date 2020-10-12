@@ -61,6 +61,12 @@
     <Compile Include="SubForms\Home_Form.Designer.cs">
       <DependentUpon>Home_Form.cs</DependentUpon>
     </Compile>
+    <Compile Include="SubForms\SearchForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SubForms\SearchForm.Designer.cs">
+      <DependentUpon>SearchForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="SubForms\UploadData_Form.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -80,6 +86,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SubForms\Home_Form.resx">
       <DependentUpon>Home_Form.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SubForms\SearchForm.resx">
+      <DependentUpon>SearchForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SubForms\UploadData_Form.resx">
       <DependentUpon>UploadData_Form.cs</DependentUpon>

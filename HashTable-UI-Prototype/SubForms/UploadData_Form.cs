@@ -27,7 +27,7 @@ namespace HashTable_UI_Prototype.SubForms
 
         private const int EDGE_VALUE = 500;
         private const int STEP_VALUE = 3;
-        private String[] hashes = { "Simple adaption hash", "Simple division hash", "Language hash" };
+        private String[] hashes = { "Simple adaption hash", "Simple division hash" };
         private String[] rehashes = { "On multiplication based", "On random based" };
 
         private MainMenu parentForm;
@@ -36,7 +36,6 @@ namespace HashTable_UI_Prototype.SubForms
         {
             InitializeComponent();
             this.parentForm = parentForm;
-
         }
 
         /// <summary>
@@ -65,6 +64,9 @@ namespace HashTable_UI_Prototype.SubForms
             ChooseRehash_CB.Text = initialChooseRehash_CB_Text;
             ChooseHash_CB.Items.AddRange(hashes);
             ChooseRehash_CB.Items.AddRange(rehashes);
+
+            // Некоторые состояния
+            needToRecreateHashFunction = false;
 
             UnlockHashFields();
         }
@@ -141,6 +143,9 @@ namespace HashTable_UI_Prototype.SubForms
         #endregion
 
         #region Чтение файла и заполнение полей идентификаторов и анализа
+
+        private bool needToRecreateHashFunction = false;
+
         private void btn_LoadFile_Click(object sender, EventArgs e)
         {
             Stopwatch timeOfReading = null;
@@ -194,6 +199,7 @@ namespace HashTable_UI_Prototype.SubForms
             FileName_TextBox.Text = filePath;
 
             parentForm.UnlockMainButtons();
+            needToRecreateHashFunction = true;
         }
 
         /// <summary>
@@ -307,7 +313,7 @@ namespace HashTable_UI_Prototype.SubForms
         /// <param name="e"></param>
         private void UploadData_Form_VisibleChanged(object sender, EventArgs e)
         {
-            if (this.Visible == false)
+            if (this.Visible == false & this.needToRecreateHashFunction)
             {
                 BlockHashFields();
 
@@ -315,8 +321,7 @@ namespace HashTable_UI_Prototype.SubForms
                 switch (ChooseHash_CB.SelectedIndex)
                 {
                     case 0: hash = new SimpleAdaptStringHF(EDGE_VALUE); break;
-                    case 1: hash = new SimpleDivisionStringHF(EDGE_VALUE); break;
-                    default: hash = new UniversalHF(); break;
+                    default: hash = new SimpleDivisionStringHF(EDGE_VALUE); break;
                 }
 
                 IRehashFunction rehash;
@@ -327,6 +332,19 @@ namespace HashTable_UI_Prototype.SubForms
                 }
 
                 parentForm.HashTable = new HashTableForString(hash, rehash);
+
+                // Получаем текст и удаляем заголовок
+                string tempText = ListOfIdentificators.Text;
+                string text = tempText.Substring(tempText.IndexOf('\n') + 1);
+
+                // Заносим данные в хэш-таблицу
+                string[] indentificators = text.Split('\n');
+                foreach (string name in indentificators)
+                {
+                    parentForm.HashTable.Add(name);
+                }
+
+                needToRecreateHashFunction = false;
             }
         }
 

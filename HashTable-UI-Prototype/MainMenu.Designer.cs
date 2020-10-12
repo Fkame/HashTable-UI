@@ -182,6 +182,7 @@
             this.btn_Searching.TabIndex = 4;
             this.btn_Searching.Text = "Searching";
             this.btn_Searching.UseVisualStyleBackColor = true;
+            this.btn_Searching.Click += new System.EventHandler(this.btn_Searching_Click);
             // 
             // btn_UploadData
             // 
