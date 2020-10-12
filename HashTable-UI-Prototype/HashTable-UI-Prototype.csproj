@@ -35,6 +35,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -73,6 +74,12 @@
     <Compile Include="SubForms\UploadData_Form.Designer.cs">
       <DependentUpon>UploadData_Form.cs</DependentUpon>
     </Compile>
+    <Compile Include="SubForms\VisualisationForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SubForms\VisualisationForm.Designer.cs">
+      <DependentUpon>VisualisationForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Welcome_Form.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -92,6 +99,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SubForms\UploadData_Form.resx">
       <DependentUpon>UploadData_Form.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SubForms\VisualisationForm.resx">
+      <DependentUpon>VisualisationForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Welcome_Form.resx">
       <DependentUpon>Welcome_Form.cs</DependentUpon>

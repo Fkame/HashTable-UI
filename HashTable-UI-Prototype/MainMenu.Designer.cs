@@ -168,6 +168,7 @@
             this.btn_Visualisation.TabIndex = 5;
             this.btn_Visualisation.Text = "Visualisation";
             this.btn_Visualisation.UseVisualStyleBackColor = true;
+            this.btn_Visualisation.Click += new System.EventHandler(this.btn_Visualisation_Click);
             // 
             // btn_Searching
             // 

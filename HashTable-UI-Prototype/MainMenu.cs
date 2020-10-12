@@ -57,6 +57,11 @@ namespace HashTable_UI_Prototype
         private SearchForm searchForm;
 
         /// <summary>
+        /// Ссылка на вложенную форму вкладки "Visualisation"
+        /// </summary>
+        private VisualisationForm visualForm;
+
+        /// <summary>
         /// Действия при загрузке формы:
         /// 1. Нужно создать "домашнюю" форму и поместить её на панель.
         /// 2. Нужно перекрасить в соответствующие цвета кнопку и заголовок.

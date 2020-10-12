@@ -92,5 +92,31 @@ namespace HashTable_UI_Prototype
             activeForm = searchForm;
             this.DoFillActiveInPanelStaff();
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btn_Visualisation_Click(object sender, EventArgs e)
+        {
+            // Если вкладка уже открыта - ничего не делаем
+            if (this.activeForm == visualForm) return;
+
+            // Если вкладка не была прежде ни разу открыта - создаём её
+            if (visualForm == null)
+                visualForm = new VisualisationForm(this);
+
+            // Если открыта вдругая вкладка - скрываем её
+            if (activeForm != null)
+                activeForm.Hide();
+
+            ClearAllButtons();
+            btn_Visualisation.BackColor = VisualisationForm.HIGHLIGHT_COLOR;
+            Header_Panel.BackColor = VisualisationForm.HIGHLIGHT_COLOR;
+
+            activeForm = visualForm;
+            this.DoFillActiveInPanelStaff();
+        }
     }
 }

@@ -33,7 +33,10 @@ namespace HashTableApp.HashTableStructure
         /// <summary>
         /// Количество элементов в массиве в текущий момент.
         /// </summary>
-        public int HashMapSize { get; }
+        public int HashMapSize 
+        { 
+            get { return size; }
+        }
 
         /// <summary>
         /// Конструктор.
