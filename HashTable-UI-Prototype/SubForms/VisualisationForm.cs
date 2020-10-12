@@ -37,9 +37,77 @@ namespace HashTable_UI_Prototype.SubForms
             DrawHistogram(data);
         }
 
+        private const int AMOUNT_OF_CELLS_IN_WIDTH = 6;
+        private const int PERCENT_OF_BORDERS_IN_CELL = 10;
+        private const float RATIO_OF_WIDTH_TO_HEIGHT_OF_CELL = 3f / 4;
+
+        private Color redColorOfCell = Color.FromArgb(149, 53, 53);
+        private Color greenColorOfCell = Color.FromArgb(116, 185, 73);
+        private Color greyColorOfCell = Color.FromArgb(196, 196, 196);
+
         private void DrawVisualisation((int full, int notRe, int re) data)
         {
+            Graphics g;
 
+            int amountOfRowsInPicture = 0;
+            if (data.full % AMOUNT_OF_CELLS_IN_WIDTH == 0)
+            {
+                amountOfRowsInPicture = data.full / AMOUNT_OF_CELLS_IN_WIDTH;
+            }
+            else
+            {
+                amountOfRowsInPicture = data.full / AMOUNT_OF_CELLS_IN_WIDTH + 1;
+            }
+
+            int nowPictureBoxWidth = VisualCells_PB.Width;
+            int cellWidth = nowPictureBoxWidth / AMOUNT_OF_CELLS_IN_WIDTH;
+            int cellHeight = (int)(cellWidth / RATIO_OF_WIDTH_TO_HEIGHT_OF_CELL);
+            int calcPictureBoxHeight = cellHeight * amountOfRowsInPicture;
+
+            int cellBodyWidth = (int)(cellWidth * ((100.0 - PERCENT_OF_BORDERS_IN_CELL) / 100.0));
+            int cellBodyHeight = (int)(cellHeight * ((100.0 - PERCENT_OF_BORDERS_IN_CELL) / 100.0));
+
+            // Создание изображения и получение способа рисования
+            VisualCells_PB.Image = new Bitmap(nowPictureBoxWidth, calcPictureBoxHeight);
+            g = Graphics.FromImage(VisualCells_PB.Image);
+
+            // Отрисовка - стоит сделать многопоточной
+            Brush red_pen = new SolidBrush(redColorOfCell);
+            Brush green_pen = new SolidBrush(greenColorOfCell);
+            Brush grey_pen = new SolidBrush(greyColorOfCell);
+
+            Brush toDraw = null;
+            string[] values = parentForm.HashTable.GetFullHashTableAsArray();
+            
+            int count = 0;
+            for (int y = 0; y < amountOfRowsInPicture; y++) 
+            {
+                for (int x = 0; x < AMOUNT_OF_CELLS_IN_WIDTH; x++)
+                {
+                    if (values[count].Equals(string.Empty))
+                    {
+                        toDraw = grey_pen;
+                    }
+                    else if (parentForm.HashTable.IsValueStoredAsRehash(values[count]))
+                    {
+                        toDraw = red_pen;
+                    }
+                    else
+                    {
+                        toDraw = green_pen;
+                    }
+
+                    // Берётся координата от прямоугольника с учётом границ и делается сдвиг к его центру
+                    int xCoord = x * cellWidth + (cellWidth - cellBodyWidth) / 2;
+                    int yCoord = y * cellHeight + (cellHeight - cellBodyHeight) / 2; ;
+                    g.FillRectangle(toDraw, xCoord, yCoord, cellBodyWidth, cellBodyHeight);
+
+                    if (++count == values.Length) break;
+                }
+
+                if (count == values.Length) break;
+                VisualCells_PB.Refresh();
+            }
         }
 
         private void DrawHistogram((int full, int notRe, int re) data)
@@ -126,7 +194,7 @@ namespace HashTable_UI_Prototype.SubForms
 
             // Обводки границ элементов
             DrawBorderToElement(Statistic, 5, g, SearchForm.HIGHLIGHT_COLOR);
-            DrawBorderToElement(VisualCells_PB, 5, g, SearchForm.HIGHLIGHT_COLOR);
+            //DrawBorderToElement(VisualCells_PB, 5, g, SearchForm.HIGHLIGHT_COLOR);
             DrawBorderToElement(Gistogram_Panel, 5, g, SearchForm.HIGHLIGHT_COLOR);
         }
 

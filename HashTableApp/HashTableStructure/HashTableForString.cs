@@ -255,14 +255,10 @@ namespace HashTableApp.HashTableStructure
             string[] copy = new string[values.Length];
             for (int i = 0; i < values.Length; i++)
             {
-                try
-                {
+                if (values[i] == null)
+                   copy[i] = string.Empty;
+                else
                     copy[i] = values[i].Value;
-                }
-                catch (NullReferenceException e)
-                {
-                    copy[i] = string.Empty;
-                }
             }
             return copy;
         }

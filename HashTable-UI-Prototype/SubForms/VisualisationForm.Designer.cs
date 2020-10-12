@@ -28,23 +28,25 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.VisualCells_PB = new System.Windows.Forms.PictureBox();
             this.Gistogram_Panel = new System.Windows.Forms.Panel();
             this.Statistic = new System.Windows.Forms.RichTextBox();
             this.Gistogram_Chart = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.PictureBox_Background_Panel = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.VisualCells_PB)).BeginInit();
             this.Gistogram_Panel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Gistogram_Chart)).BeginInit();
+            this.PictureBox_Background_Panel.SuspendLayout();
             this.SuspendLayout();
             // 
             // VisualCells_PB
             // 
-            this.VisualCells_PB.Location = new System.Drawing.Point(12, 12);
+            this.VisualCells_PB.Location = new System.Drawing.Point(3, 3);
             this.VisualCells_PB.Name = "VisualCells_PB";
-            this.VisualCells_PB.Size = new System.Drawing.Size(350, 406);
+            this.VisualCells_PB.Size = new System.Drawing.Size(350, 380);
             this.VisualCells_PB.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.VisualCells_PB.TabIndex = 0;
             this.VisualCells_PB.TabStop = false;
@@ -69,20 +71,30 @@
             // 
             // Gistogram_Chart
             // 
-            chartArea4.Name = "ChartArea1";
-            this.Gistogram_Chart.ChartAreas.Add(chartArea4);
+            chartArea2.Name = "ChartArea1";
+            this.Gistogram_Chart.ChartAreas.Add(chartArea2);
             this.Gistogram_Chart.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend4.Name = "Legend1";
-            this.Gistogram_Chart.Legends.Add(legend4);
+            legend2.Name = "Legend1";
+            this.Gistogram_Chart.Legends.Add(legend2);
             this.Gistogram_Chart.Location = new System.Drawing.Point(0, 0);
             this.Gistogram_Chart.Name = "Gistogram_Chart";
-            series4.ChartArea = "ChartArea1";
-            series4.Legend = "Legend1";
-            series4.Name = "Series1";
-            this.Gistogram_Chart.Series.Add(series4);
+            series2.ChartArea = "ChartArea1";
+            series2.Legend = "Legend1";
+            series2.Name = "Series1";
+            this.Gistogram_Chart.Series.Add(series2);
             this.Gistogram_Chart.Size = new System.Drawing.Size(350, 222);
             this.Gistogram_Chart.TabIndex = 0;
             this.Gistogram_Chart.Text = "chart1";
+            // 
+            // PictureBox_Background_Panel
+            // 
+            this.PictureBox_Background_Panel.AutoScroll = true;
+            this.PictureBox_Background_Panel.BackColor = System.Drawing.Color.Beige;
+            this.PictureBox_Background_Panel.Controls.Add(this.VisualCells_PB);
+            this.PictureBox_Background_Panel.Location = new System.Drawing.Point(12, 12);
+            this.PictureBox_Background_Panel.Name = "PictureBox_Background_Panel";
+            this.PictureBox_Background_Panel.Size = new System.Drawing.Size(370, 406);
+            this.PictureBox_Background_Panel.TabIndex = 3;
             // 
             // VisualisationForm
             // 
@@ -90,9 +102,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Beige;
             this.ClientSize = new System.Drawing.Size(750, 430);
+            this.Controls.Add(this.PictureBox_Background_Panel);
             this.Controls.Add(this.Statistic);
             this.Controls.Add(this.Gistogram_Panel);
-            this.Controls.Add(this.VisualCells_PB);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "VisualisationForm";
             this.Text = "VisualisationForm";
@@ -100,8 +112,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.VisualCells_PB)).EndInit();
             this.Gistogram_Panel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.Gistogram_Chart)).EndInit();
+            this.PictureBox_Background_Panel.ResumeLayout(false);
+            this.PictureBox_Background_Panel.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -111,5 +124,6 @@
         private System.Windows.Forms.Panel Gistogram_Panel;
         private System.Windows.Forms.RichTextBox Statistic;
         private System.Windows.Forms.DataVisualization.Charting.Chart Gistogram_Chart;
+        private System.Windows.Forms.Panel PictureBox_Background_Panel;
     }
 }
