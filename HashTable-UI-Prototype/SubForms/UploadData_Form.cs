@@ -4,7 +4,12 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Text;
+using System.Collections.Generic;
 using System.Windows.Forms;
+
+using HashTableApp.HashTableStructure;
+using HashTableApp.HashTableStructure.HashFunctions;
+using HashTableApp.HashTableStructure.ReHashFunctions;
 
 namespace HashTable_UI_Prototype.SubForms
 {
@@ -20,12 +25,18 @@ namespace HashTable_UI_Prototype.SubForms
         private String initialChooseHash_CB_Text = "Choose hash-type here";
         private String initialChooseRehash_CB_Text = "Choose rehash-type here";
 
+        private const int EDGE_VALUE = 500;
+        private const int STEP_VALUE = 3;
+        private String[] hashes = { "Simple adaption hash", "Simple division hash", "Language hash" };
+        private String[] rehashes = { "On multiplication based", "On random based" };
+
         private MainMenu parentForm;
 
         public UploadData_Form(MainMenu parentForm)
         {
             InitializeComponent();
             this.parentForm = parentForm;
+
         }
 
         /// <summary>
@@ -52,6 +63,8 @@ namespace HashTable_UI_Prototype.SubForms
             // Списки
             ChooseHash_CB.Text = initialChooseHash_CB_Text;
             ChooseRehash_CB.Text = initialChooseRehash_CB_Text;
+            ChooseHash_CB.Items.AddRange(hashes);
+            ChooseRehash_CB.Items.AddRange(rehashes);
 
             UnlockHashFields();
         }
@@ -255,28 +268,11 @@ namespace HashTable_UI_Prototype.SubForms
 
         #region Анимация при наведении на иконку
 
-        private int sizeChanges = 10;
         private void Refresh_PB_MouseEnter(object sender, EventArgs e)
         {
             Size preS = this.Refresh_PB.Size;
             Point preL = this.Refresh_PB.Location;
 
-            for (int i = 0; i < sizeChanges; i++)
-            {
-                preS.Width -= 1;
-                preS.Height -= 1;
-
-                if (i % 2 == 0)
-                {
-                    preL.X += 1;
-                    preL.Y += 1;
-                }
-
-                this.Refresh_PB.Size = preS;
-                this.Refresh_PB.Location = preL;
-            }
-
-            /*
             preS.Width -= 10;
             preS.Height -= 10;
 
@@ -285,7 +281,6 @@ namespace HashTable_UI_Prototype.SubForms
 
             this.Refresh_PB.Size = preS;
             this.Refresh_PB.Location = preL;
-            */
         }
 
         private void Refresh_PB_MouseLeave(object sender, EventArgs e)
@@ -312,7 +307,27 @@ namespace HashTable_UI_Prototype.SubForms
         /// <param name="e"></param>
         private void UploadData_Form_VisibleChanged(object sender, EventArgs e)
         {
-            if (this.Visible == false) BlockHashFields();
+            if (this.Visible == false)
+            {
+                BlockHashFields();
+
+                IHashFunction hash;
+                switch (ChooseHash_CB.SelectedIndex)
+                {
+                    case 0: hash = new SimpleAdaptStringHF(EDGE_VALUE); break;
+                    case 1: hash = new SimpleDivisionStringHF(EDGE_VALUE); break;
+                    default: hash = new UniversalHF(); break;
+                }
+
+                IRehashFunction rehash;
+                switch (ChooseRehash_CB.SelectedIndex)
+                {
+                    case 0: rehash = new OnMultiplicationBasedRHF(STEP_VALUE, EDGE_VALUE); break;
+                    default: rehash = new OnRandomBasedRHF(EDGE_VALUE); break;
+                }
+
+                parentForm.HashTable = new HashTableForString(hash, rehash);
+            }
         }
 
         /*

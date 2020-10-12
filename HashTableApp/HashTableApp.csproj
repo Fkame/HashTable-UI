@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{6E659695-98A6-4383-AD54-C8858C722CD8}</ProjectGuid>
+    <ProjectGuid>{E8413E8C-5092-451E-9EFE-268D718507C8}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>HashTable_UI_Prototype</RootNamespace>
-    <AssemblyName>HashTable-UI-Prototype</AssemblyName>
+    <RootNamespace>HashTableApp</RootNamespace>
+    <AssemblyName>HashTableApp</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -35,6 +35,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Numerics" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -46,47 +47,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MainMenu_MenuButtons.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="MainMenu.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="MainMenu.Designer.cs">
-      <DependentUpon>MainMenu.cs</DependentUpon>
-    </Compile>
-    <Compile Include="SubForms\Home_Form.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="SubForms\Home_Form.Designer.cs">
-      <DependentUpon>Home_Form.cs</DependentUpon>
-    </Compile>
-    <Compile Include="SubForms\UploadData_Form.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="SubForms\UploadData_Form.Designer.cs">
-      <DependentUpon>UploadData_Form.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Welcome_Form.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Welcome_Form.Designer.cs">
-      <DependentUpon>Welcome_Form.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Program.cs" />
+    <Compile Include="EnterPoint.cs" />
+    <Compile Include="HashTableStructure\HashFunctions\SimpleAdaptStringHF.cs" />
+    <Compile Include="HashTableStructure\HashFunctions\UniversalHF.cs" />
+    <Compile Include="HashTableStructure\HashFunctions\IHashFunction.cs" />
+    <Compile Include="HashTableStructure\HashFunctions\SimpleDivisionStringHF.cs" />
+    <Compile Include="HashTableStructure\HashTableForString.cs" />
+    <Compile Include="HashTableStructure\ReHashFunctions\IRehashFunction.cs" />
+    <Compile Include="HashTableStructure\ReHashFunctions\OnMultiplicationBasedRHF.cs" />
+    <Compile Include="HashTableStructure\ReHashFunctions\OnRandomBasedRHF.cs" />
+    <Compile Include="HashTableStructure\Support\NumberOperationsSupport.cs" />
+    <Compile Include="HashTableStructure\Support\StringOperationsSupport.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="MainMenu.resx">
-      <DependentUpon>MainMenu.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="SubForms\Home_Form.resx">
-      <DependentUpon>Home_Form.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="SubForms\UploadData_Form.resx">
-      <DependentUpon>UploadData_Form.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Welcome_Form.resx">
-      <DependentUpon>Welcome_Form.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -95,7 +67,6 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -110,11 +81,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\HashTableApp\HashTableApp.csproj">
-      <Project>{e8413e8c-5092-451e-9efe-268d718507c8}</Project>
-      <Name>HashTableApp</Name>
-    </ProjectReference>
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

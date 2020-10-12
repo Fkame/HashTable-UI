@@ -3,6 +3,9 @@ using System.Drawing;
 using System.Windows.Forms;
 
 using HashTable_UI_Prototype.SubForms;
+using HashTableApp.HashTableStructure;
+using HashTableApp.HashTableStructure.HashFunctions;
+using HashTableApp.HashTableStructure.ReHashFunctions;
 
 namespace HashTable_UI_Prototype
 {
@@ -27,6 +30,11 @@ namespace HashTable_UI_Prototype
         /// Стандартный цвет для невыделенного элемента.
         /// </summary>
         private static Color NOT_SELECTED_BUTTON_COLOR = Color.FromArgb(48, 47, 79);
+
+        /// <summary>
+        /// Хэш таблица
+        /// </summary>
+        public HashTableForString HashTable { get; internal set; } = null;
 
         /// <summary>
         /// Переменная используется для того, чтобы свернуть или закрыть предыдущую форму.
