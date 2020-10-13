@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace HashTable_UI_Prototype.SubForms
 {
@@ -37,6 +38,8 @@ namespace HashTable_UI_Prototype.SubForms
             DrawHistogram(data);
         }
 
+        #region Отрисовка клеток на панели слева
+
         private const int AMOUNT_OF_CELLS_IN_WIDTH = 6;
         private const int PERCENT_OF_BORDERS_IN_CELL = 10;
         private const float RATIO_OF_WIDTH_TO_HEIGHT_OF_CELL = 3f / 4;
@@ -45,6 +48,10 @@ namespace HashTable_UI_Prototype.SubForms
         private Color greenColorOfCell = Color.FromArgb(116, 185, 73);
         private Color greyColorOfCell = Color.FromArgb(196, 196, 196);
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="data"></param>
         private void DrawVisualisation((int full, int notRe, int re) data)
         {
             Graphics g;
@@ -64,13 +71,17 @@ namespace HashTable_UI_Prototype.SubForms
             int cellHeight = (int)(cellWidth / RATIO_OF_WIDTH_TO_HEIGHT_OF_CELL);
             int calcPictureBoxHeight = cellHeight * amountOfRowsInPicture;
 
-            int cellBodyWidth = (int)(cellWidth * ((100.0 - PERCENT_OF_BORDERS_IN_CELL) / 100.0));
-            int cellBodyHeight = (int)(cellHeight * ((100.0 - PERCENT_OF_BORDERS_IN_CELL) / 100.0));
+            //int cellBodyWidth = (int)(cellWidth * ((100.0 - PERCENT_OF_BORDERS_IN_CELL) / 100.0));
+            //int cellBodyHeight = (int)(cellHeight * ((100.0 - PERCENT_OF_BORDERS_IN_CELL) / 100.0));
 
             // Создание изображения и получение способа рисования
             VisualCells_PB.Image = new Bitmap(nowPictureBoxWidth, calcPictureBoxHeight);
             g = Graphics.FromImage(VisualCells_PB.Image);
 
+            DrawCells(g, amountOfRowsInPicture, AMOUNT_OF_CELLS_IN_WIDTH, cellWidth, cellHeight);
+
+            #region old code backup
+            /*
             // Отрисовка - стоит сделать многопоточной
             Brush red_pen = new SolidBrush(redColorOfCell);
             Brush green_pen = new SolidBrush(greenColorOfCell);
@@ -108,17 +119,88 @@ namespace HashTable_UI_Prototype.SubForms
                 if (count == values.Length) break;
                 VisualCells_PB.Refresh();
             }
+            */
+            #endregion
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="g"></param>
+        /// <param name="rows"></param>
+        /// <param name="columns"></param>
+        /// <param name="cellWidth"></param>
+        /// <param name="cellHeight"></param>
+        private void DrawCells(Graphics g, int rows, int columns, int cellWidth, int cellHeight)
+        {
+            int cellBodyWidth = (int)(cellWidth * ((100.0 - PERCENT_OF_BORDERS_IN_CELL) / 100.0));
+            int cellBodyHeight = (int)(cellHeight * ((100.0 - PERCENT_OF_BORDERS_IN_CELL) / 100.0));
+
+            // Отрисовка - стоит сделать многопоточной
+            Brush red_pen = new SolidBrush(redColorOfCell);
+            Brush green_pen = new SolidBrush(greenColorOfCell);
+            Brush grey_pen = new SolidBrush(greyColorOfCell);
+
+            Brush toDraw = null;
+            string[] values = parentForm.HashTable.GetFullHashTableAsArray();
+
+            int count = 0;
+            for (int y = 0; y < rows; y++)
+            {
+                for (int x = 0; x < columns; x++)
+                {
+                    if (values[count].Equals(string.Empty))
+                    {
+                        toDraw = grey_pen;
+                    }
+                    else if (parentForm.HashTable.IsValueStoredAsRehash(values[count]))
+                    {
+                        toDraw = red_pen;
+                    }
+                    else
+                    {
+                        toDraw = green_pen;
+                    }
+
+                    // Берётся координата от прямоугольника с учётом границ и делается сдвиг к его центру
+                    int xCoord = x * cellWidth + (cellWidth - cellBodyWidth) / 2;
+                    int yCoord = y * cellHeight + (cellHeight - cellBodyHeight) / 2; ;
+                    g.FillRectangle(toDraw, xCoord, yCoord, cellBodyWidth, cellBodyHeight);
+
+                    if (++count == values.Length) break;
+                }
+
+                if (count == values.Length) break;
+                VisualCells_PB.Refresh();
+            }
+        }
+
+        #endregion
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="data"></param>
         private void DrawHistogram((int full, int notRe, int re) data)
         {
+            Circular_Chart.Series.Clear();
 
+            int emptyCells = data.full - data.re - data.notRe;
+            int notRehashedCells = data.notRe;
+            int rehashedCells = data.re;
+            Circular_Chart.Series.Add(new Series("pie"));
+            Circular_Chart.Series[0].ChartType = SeriesChartType.Pie;
+
+            Circular_Chart.Series[0].IsVisibleInLegend = false;
+            Circular_Chart.Series[0].Points.Add(emptyCells).Color = greyColorOfCell;
+            Circular_Chart.Series[0].Points.Add(notRehashedCells).Color = greenColorOfCell;
+            Circular_Chart.Series[0].Points.Add(rehashedCells).Color = redColorOfCell;
         }
 
         private (int FullAmount, int NotReashed, int Rehashed) GetAndSetStatistic()
         {
             // Поле текста
-            StringBuilder text = new StringBuilder("- - - Here will be statistic of searching - - -\n");
+            StringBuilder text = new StringBuilder("- - - Global statistic - - -\n");
 
             // Amount of identificators
             text.Append("Amount of identificators = ");
@@ -144,11 +226,6 @@ namespace HashTable_UI_Prototype.SubForms
             text.Append(rehashCount);
             text.Append(" [Red]\n");
 
-            // max rehash value
-            text.Append("Maximum rehash level = ");
-            text.Append(parentForm.HashTable.GetMaxRehashLevel());
-            text.Append("\n");
-
             // Amount of Empty
             text.Append("Amount of Empty = ");
             string[] allValues = parentForm.HashTable.GetFullHashTableAsArray();
@@ -161,6 +238,11 @@ namespace HashTable_UI_Prototype.SubForms
             text.Append("Amount of not rehashed values = ");
             text.Append(notRehashCount);
             text.Append(" [Green]\n");
+
+            // max rehash value
+            text.Append("Maximum rehash level = ");
+            text.Append(parentForm.HashTable.GetMaxRehashLevel());
+            text.Append("\n");
 
             Statistic.Text = text.ToString();
 
@@ -193,9 +275,9 @@ namespace HashTable_UI_Prototype.SubForms
             Graphics g = e.Graphics;
 
             // Обводки границ элементов
-            DrawBorderToElement(Statistic, 5, g, SearchForm.HIGHLIGHT_COLOR);
-            //DrawBorderToElement(VisualCells_PB, 5, g, SearchForm.HIGHLIGHT_COLOR);
-            DrawBorderToElement(Gistogram_Panel, 5, g, SearchForm.HIGHLIGHT_COLOR);
+            DrawBorderToElement(Statistic, 5, g, VisualisationForm.HIGHLIGHT_COLOR);
+            DrawBorderToElement(PictureBox_Background_Panel, 5, g, VisualisationForm.HIGHLIGHT_COLOR);
+            DrawBorderToElement(Char_Panel, 5, g, VisualisationForm.HIGHLIGHT_COLOR);
         }
 
         #endregion

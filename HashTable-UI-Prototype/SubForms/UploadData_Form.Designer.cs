@@ -75,7 +75,7 @@
             // 
             // ListOfIdentificators
             // 
-            this.ListOfIdentificators.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.ListOfIdentificators.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.ListOfIdentificators.Font = new System.Drawing.Font("Ubuntu", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.ListOfIdentificators.Location = new System.Drawing.Point(12, 83);
             this.ListOfIdentificators.Name = "ListOfIdentificators";
@@ -86,7 +86,7 @@
             // 
             // Statistic
             // 
-            this.Statistic.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Statistic.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.Statistic.Font = new System.Drawing.Font("Ubuntu", 11.95F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.Statistic.Location = new System.Drawing.Point(393, 83);
             this.Statistic.Name = "Statistic";
@@ -101,7 +101,7 @@
             this.FileName_TextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.FileName_TextBox.Font = new System.Drawing.Font("Ubuntu", 15.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
             this.FileName_TextBox.ForeColor = System.Drawing.Color.DimGray;
-            this.FileName_TextBox.Location = new System.Drawing.Point(12, 370);
+            this.FileName_TextBox.Location = new System.Drawing.Point(12, 374);
             this.FileName_TextBox.Name = "FileName_TextBox";
             this.FileName_TextBox.ReadOnly = true;
             this.FileName_TextBox.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;

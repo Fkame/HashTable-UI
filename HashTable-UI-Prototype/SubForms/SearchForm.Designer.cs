@@ -37,7 +37,7 @@
             // 
             // Statistic
             // 
-            this.Statistic.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Statistic.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.Statistic.Font = new System.Drawing.Font("Ubuntu", 12F);
             this.Statistic.Location = new System.Drawing.Point(12, 12);
             this.Statistic.Name = "Statistic";
@@ -48,7 +48,7 @@
             // 
             // Identificators
             // 
-            this.Identificators.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Identificators.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.Identificators.Font = new System.Drawing.Font("Ubuntu", 12F);
             this.Identificators.Location = new System.Drawing.Point(380, 12);
             this.Identificators.Name = "Identificators";
