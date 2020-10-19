@@ -86,6 +86,16 @@ namespace HashTable_UI_Prototype
             BlockMainButtons();
         }
 
+        public void NotifyAboutDataChanges()
+        {
+            if (this.searchForm != null) searchForm.NeedToUpdateDataBeforeShowing = true;
+            if (this.visualForm != null) visualForm.NeedToUpdateDataBeforeShowing = true;
+            if (this.storedDataForm != null) storedDataForm.NeedToUpdateDataBeforeShowing = true;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public void BlockMainButtons()
         {
             btn_Searching.Enabled = false;
@@ -93,6 +103,9 @@ namespace HashTable_UI_Prototype
             btn_StoredData.Enabled = false;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void UnlockMainButtons()
         {
             btn_Searching.Enabled = true;
@@ -113,7 +126,6 @@ namespace HashTable_UI_Prototype
             activeForm.Show();
         }
   
-
         #region Кнопки закрытия и событие закрытия формы
 
         /// <summary>
@@ -126,6 +138,11 @@ namespace HashTable_UI_Prototype
             this.Close();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_Exit_MouseDown(object sender, MouseEventArgs e)
         {
             Size preS = this.btn_Exit.Size;
@@ -141,6 +158,11 @@ namespace HashTable_UI_Prototype
             this.btn_Exit.Location = preL;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_Exit_MouseUp(object sender, MouseEventArgs e)
         {
             Size preS = this.btn_Exit.Size;
@@ -183,11 +205,21 @@ namespace HashTable_UI_Prototype
         /// </summary>
         private (int X, int Y) coordsBeforeMove = (X: 0, Y: 0);
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Header_Panel_MouseUp(object sender, MouseEventArgs e)
         {
             this.isMouseClicked = false;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Header_Panel_MouseMove(object sender, MouseEventArgs e)
         {
             if (!this.isMouseClicked) return;
@@ -202,13 +234,17 @@ namespace HashTable_UI_Prototype
             this.Location = windowPosition;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Header_Panel_MouseDown(object sender, MouseEventArgs e)
         {
             this.isMouseClicked = true;
             this.coordsBeforeMove.X = e.X;
             this.coordsBeforeMove.Y = e.Y;
         }
-
 
         #endregion
 

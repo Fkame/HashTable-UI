@@ -154,7 +154,11 @@ namespace HashTable_UI_Prototype
             activeForm = storedDataForm;
             this.DoFillActiveInPanelStaff();
         }
-
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="btn"></param>
         private void ChangeHeaderName(Button btn)
         {
             btn_Header.Text = btn.Text.ToUpper();

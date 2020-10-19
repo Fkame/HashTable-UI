@@ -18,6 +18,8 @@ namespace HashTable_UI_Prototype.SubForms
             this.parentForm = parentForm;
         }
 
+        public bool NeedToUpdateDataBeforeShowing { get; set; } = true;
+
         #region Инициализация начальных значений
 
         /// <summary>
@@ -37,14 +39,14 @@ namespace HashTable_UI_Prototype.SubForms
             string[] values = parentForm.HashTable.GetOnlyNotNullValues();
             string valuesInLine = String.Join("\n", values);
 
-            Identificators.Text += "Full amount = " + values.Length.ToString() + "\n";
+            Identificators.Text += "[Full amount = " + values.Length.ToString() + "]";
 
             Identificators.Text += valuesInLine;
         }
 
         private void SearchForm_Load(object sender, EventArgs e)
         {
-            SetInitialValues();
+            //SetInitialValues();
         }
 
         #endregion
@@ -182,5 +184,12 @@ namespace HashTable_UI_Prototype.SubForms
         }
 
         #endregion
+
+        private void SearchForm_VisibleChanged(object sender, EventArgs e)
+        {
+            if (this.Visible == false) return;
+            if (NeedToUpdateDataBeforeShowing == true)
+                SetInitialValues();
+        }
     }
 }

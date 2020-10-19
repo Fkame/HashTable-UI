@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.VisualCells_PB = new System.Windows.Forms.PictureBox();
             this.Char_Panel = new System.Windows.Forms.Panel();
             this.Circular_Chart = new System.Windows.Forms.DataVisualization.Charting.Chart();
@@ -61,17 +61,17 @@
             // 
             // Circular_Chart
             // 
-            chartArea2.Name = "ChartArea1";
-            this.Circular_Chart.ChartAreas.Add(chartArea2);
+            chartArea1.Name = "ChartArea1";
+            this.Circular_Chart.ChartAreas.Add(chartArea1);
             this.Circular_Chart.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend2.Name = "Legend1";
-            this.Circular_Chart.Legends.Add(legend2);
+            legend1.Name = "Legend1";
+            this.Circular_Chart.Legends.Add(legend1);
             this.Circular_Chart.Location = new System.Drawing.Point(0, 0);
             this.Circular_Chart.Name = "Circular_Chart";
-            series2.ChartArea = "ChartArea1";
-            series2.Legend = "Legend1";
-            series2.Name = "Series1";
-            this.Circular_Chart.Series.Add(series2);
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.Circular_Chart.Series.Add(series1);
             this.Circular_Chart.Size = new System.Drawing.Size(350, 222);
             this.Circular_Chart.TabIndex = 0;
             this.Circular_Chart.Text = "chart1";
@@ -110,6 +110,7 @@
             this.Name = "VisualisationForm";
             this.Text = "VisualisationForm";
             this.Shown += new System.EventHandler(this.VisualisationForm_Shown);
+            this.VisibleChanged += new System.EventHandler(this.VisualisationForm_VisibleChanged);
             ((System.ComponentModel.ISupportInitialize)(this.VisualCells_PB)).EndInit();
             this.Char_Panel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.Circular_Chart)).EndInit();

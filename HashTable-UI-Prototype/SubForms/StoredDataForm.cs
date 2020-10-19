@@ -22,6 +22,8 @@ namespace HashTable_UI_Prototype.SubForms
             this.parentForm = parentForm;
         }
 
+        public bool NeedToUpdateDataBeforeShowing { get; set; } = true;
+
         private void StoredDataForm_Load(object sender, EventArgs e)
         { 
             #region Визуальный осмотр видов границ ячеек
@@ -118,9 +120,12 @@ namespace HashTable_UI_Prototype.SubForms
         {
             if (this.Visible == false) return;
 
-            DataTable.Rows.Clear();
-            LoadDataToDataGridView();
-            CustomizeDataGridView();
+            if (NeedToUpdateDataBeforeShowing == true)
+            {
+                DataTable.Rows.Clear();
+                LoadDataToDataGridView();
+                CustomizeDataGridView();
+            }
         }
     }
 }

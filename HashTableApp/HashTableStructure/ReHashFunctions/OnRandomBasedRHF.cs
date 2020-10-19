@@ -26,7 +26,7 @@ namespace HashTableApp.HashTableStructure.ReHashFunctions
         /// Предельное значение хэш-функции, которую необходимо рехэшировать. 
         /// Данное значение необходимо, чтобы не выйти за предел допустимых значений.
         /// </summary>
-        public int MaxValueOfHashFunction { get; }
+        public int MaxValueOfHashFunction { get { return this.maxValueOfHashFunction; } }
 
         /// <summary>
         /// Конструктор. Инициализирует переменны и проверяет выход параметров за пределы.
@@ -38,6 +38,8 @@ namespace HashTableApp.HashTableStructure.ReHashFunctions
         {
             if (maxValueOfHashFunction <= 0) 
                 throw new ArgumentOutOfRangeException();
+
+            this.maxValueOfHashFunction = maxValueOfHashFunction;
 
             pseudoNumbersArray = new int[maxValueOfHashFunction];
 

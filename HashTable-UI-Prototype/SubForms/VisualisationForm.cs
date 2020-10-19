@@ -23,9 +23,11 @@ namespace HashTable_UI_Prototype.SubForms
             this.parentForm = parentForm;
         }
 
+        public bool NeedToUpdateDataBeforeShowing { get; set; } = true;
+
         private void VisualisationForm_Shown(object sender, EventArgs e)
         {
-            SetInitialValues();
+            //SetInitialValues();
         }
 
         /// <summary>
@@ -282,5 +284,11 @@ namespace HashTable_UI_Prototype.SubForms
 
         #endregion
 
+        private void VisualisationForm_VisibleChanged(object sender, EventArgs e)
+        {
+            if (this.Visible == false) return;
+            if (NeedToUpdateDataBeforeShowing == true)
+                SetInitialValues();
+        }
     }
 }

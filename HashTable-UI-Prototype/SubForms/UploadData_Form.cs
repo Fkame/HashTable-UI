@@ -199,6 +199,7 @@ namespace HashTable_UI_Prototype.SubForms
             FileName_TextBox.Text = filePath;
 
             parentForm.UnlockMainButtons();
+            parentForm.NotifyAboutDataChanges();
             needToRecreateHashFunction = true;
         }
 

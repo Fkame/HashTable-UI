@@ -104,6 +104,7 @@
             this.Name = "SearchForm";
             this.Text = "SearchForm";
             this.Load += new System.EventHandler(this.SearchForm_Load);
+            this.VisibleChanged += new System.EventHandler(this.SearchForm_VisibleChanged);
             this.ResumeLayout(false);
             this.PerformLayout();
 
