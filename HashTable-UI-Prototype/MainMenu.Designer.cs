@@ -96,11 +96,12 @@
             this.btn_Header.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_Header.Font = new System.Drawing.Font("Ubuntu", 24.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.btn_Header.ForeColor = System.Drawing.Color.Beige;
-            this.btn_Header.Location = new System.Drawing.Point(456, 15);
+            this.btn_Header.Location = new System.Drawing.Point(335, 15);
             this.btn_Header.Name = "btn_Header";
-            this.btn_Header.Size = new System.Drawing.Size(117, 41);
+            this.btn_Header.Size = new System.Drawing.Size(404, 41);
             this.btn_Header.TabIndex = 3;
             this.btn_Header.Text = "HOME";
+            this.btn_Header.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Logo_Panel
             // 
@@ -154,6 +155,7 @@
             this.btn_StoredData.TabIndex = 6;
             this.btn_StoredData.Text = "Stored data";
             this.btn_StoredData.UseVisualStyleBackColor = true;
+            this.btn_StoredData.Click += new System.EventHandler(this.btn_StoredData_Click);
             // 
             // btn_Visualisation
             // 
@@ -234,6 +236,7 @@
             this.Controls.Add(this.Header_Panel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "MainMenu";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "HashTable App";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainMenu_FormClosed);
             this.Load += new System.EventHandler(this.MainMenu_Load);

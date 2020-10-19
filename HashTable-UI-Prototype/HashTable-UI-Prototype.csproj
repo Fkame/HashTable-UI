@@ -68,6 +68,12 @@
     <Compile Include="SubForms\SearchForm.Designer.cs">
       <DependentUpon>SearchForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="SubForms\StoredDataForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SubForms\StoredDataForm.Designer.cs">
+      <DependentUpon>StoredDataForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="SubForms\UploadData_Form.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -96,6 +102,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SubForms\SearchForm.resx">
       <DependentUpon>SearchForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SubForms\StoredDataForm.resx">
+      <DependentUpon>StoredDataForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SubForms\UploadData_Form.resx">
       <DependentUpon>UploadData_Form.cs</DependentUpon>

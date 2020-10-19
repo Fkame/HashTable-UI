@@ -347,12 +347,5 @@ namespace HashTable_UI_Prototype.SubForms
                 needToRecreateHashFunction = false;
             }
         }
-
-        /*
-public HashTable GetHashTable()
-{
-
-}
-*/
     }
 }

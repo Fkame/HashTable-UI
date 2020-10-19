@@ -1,5 +1,5 @@
 ﻿using System;
-
+using System.Windows.Forms;
 using HashTable_UI_Prototype.SubForms;
 
 namespace HashTable_UI_Prototype
@@ -34,6 +34,8 @@ namespace HashTable_UI_Prototype
             btn_Home.BackColor = Home_Form.HIGHLIGHT_COLOR;
             Header_Panel.BackColor = Home_Form.HIGHLIGHT_COLOR;
 
+            ChangeHeaderName(btn_Home);
+
             activeForm = homeForm;
             this.DoFillActiveInPanelStaff();
         }
@@ -63,6 +65,8 @@ namespace HashTable_UI_Prototype
             btn_UploadData.BackColor = UploadData_Form.HIGHLIGHT_COLOR;
             Header_Panel.BackColor = UploadData_Form.HIGHLIGHT_COLOR;
 
+            ChangeHeaderName(btn_UploadData);
+
             activeForm = uploadDataForm;
             this.DoFillActiveInPanelStaff();
         }
@@ -88,6 +92,8 @@ namespace HashTable_UI_Prototype
             ClearAllButtons();
             btn_Searching.BackColor = SearchForm.HIGHLIGHT_COLOR;
             Header_Panel.BackColor = SearchForm.HIGHLIGHT_COLOR;
+
+            ChangeHeaderName(btn_Searching);
 
             activeForm = searchForm;
             this.DoFillActiveInPanelStaff();
@@ -115,8 +121,43 @@ namespace HashTable_UI_Prototype
             btn_Visualisation.BackColor = VisualisationForm.HIGHLIGHT_COLOR;
             Header_Panel.BackColor = VisualisationForm.HIGHLIGHT_COLOR;
 
+            ChangeHeaderName(btn_Visualisation);
+
             activeForm = visualForm;
             this.DoFillActiveInPanelStaff();
         }
-    }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btn_StoredData_Click(object sender, EventArgs e)
+        {
+            // Если вкладка уже открыта - ничего не делаем
+            if (this.activeForm == storedDataForm) return;
+
+            // Если вкладка не была прежде ни разу открыта - создаём её
+            if (storedDataForm == null)
+                storedDataForm = new StoredDataForm(this);
+
+            // Если открыта вдругая вкладка - скрываем её
+            if (activeForm != null)
+                activeForm.Hide();
+
+            ClearAllButtons();
+            btn_StoredData.BackColor = StoredDataForm.HIGHLIGHT_COLOR;
+            Header_Panel.BackColor = StoredDataForm.HIGHLIGHT_COLOR;
+
+            ChangeHeaderName(btn_StoredData);
+
+            activeForm = storedDataForm;
+            this.DoFillActiveInPanelStaff();
+        }
+
+        private void ChangeHeaderName(Button btn)
+        {
+            btn_Header.Text = btn.Text.ToUpper();
+        }
+     }
 }

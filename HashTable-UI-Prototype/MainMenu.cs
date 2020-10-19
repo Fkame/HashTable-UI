@@ -62,6 +62,11 @@ namespace HashTable_UI_Prototype
         private VisualisationForm visualForm;
 
         /// <summary>
+        /// Ссылка на вложенную форму вкладки "Stored data"
+        /// </summary>
+        private StoredDataForm storedDataForm;
+
+        /// <summary>
         /// Действия при загрузке формы:
         /// 1. Нужно создать "домашнюю" форму и поместить её на панель.
         /// 2. Нужно перекрасить в соответствующие цвета кнопку и заголовок.
