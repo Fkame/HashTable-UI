@@ -6,8 +6,19 @@ using System.Windows.Forms;
 
 namespace HashTable_UI_Prototype.SubForms
 {
-    public partial class SearchForm : Form
+    public partial class SearchForm : Form, IFormWithHint
     {
+        private string[] HINT_TEXT = {
+            "This is Search data form, as you can see.",
+            "\nHere you can test my hash table.",
+            "\nQuick quide to the interface:",
+            "1. On left panel will show statistic about word what you entered.",
+            "2. On right panel there is the list of identificators in hash table.",
+            "3. In text box down below you can enter any word you wish.",      
+            "4. To start searching you need to click on big button below.",
+            "\n~~~Close this window to continue~~~"
+        };
+
         public static Color HIGHLIGHT_COLOR = Color.FromArgb(31, 125, 99);
 
         private MainMenu parentForm;
@@ -190,6 +201,11 @@ namespace HashTable_UI_Prototype.SubForms
             if (this.Visible == false) return;
             if (NeedToUpdateDataBeforeShowing == true)
                 SetInitialValues();
+        }
+
+        public string GetHintText()
+        {
+            return string.Join("\n", HINT_TEXT);
         }
     }
 }

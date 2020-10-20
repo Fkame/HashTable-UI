@@ -11,8 +11,21 @@ using System.Windows.Forms.DataVisualization.Charting;
 
 namespace HashTable_UI_Prototype.SubForms
 {
-    public partial class VisualisationForm : Form
+    public partial class VisualisationForm : Form, IFormWithHint
     {
+        private string[] HINT_TEXT = {
+            "This is Visualisation form, as you can see.",
+            "\nHere you i tried to visualisate information in hash table.",
+            "\nQuick quide to the interface:",
+            "1. On left panel you can see some rectangles. They are represent hash table cells",
+            "  * Grey - emply cell",
+            "  * Green - cell with data which stored by direct hash",
+            "  * Red - also cell with datam but because of collision it was rehashed and now is storing not by direct hash code.",
+            "2. On right top panel there is the pie chart with this red-grey-green cells in percents of full amount.",
+            "3. On right botton panel there is general statistic amout stored data",
+            "\n~~~Close this window to continue~~~"
+        };
+
         public static Color HIGHLIGHT_COLOR = Color.FromArgb(191, 182, 48);
 
         private MainMenu parentForm;
@@ -289,6 +302,11 @@ namespace HashTable_UI_Prototype.SubForms
             if (this.Visible == false) return;
             if (NeedToUpdateDataBeforeShowing == true)
                 SetInitialValues();
+        }
+
+        public string GetHintText()
+        {
+            return string.Join("\n", HINT_TEXT);
         }
     }
 }

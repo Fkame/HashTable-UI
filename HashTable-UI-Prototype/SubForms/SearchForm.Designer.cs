@@ -64,6 +64,7 @@
             this.EnterIdentificator_TB.ForeColor = System.Drawing.Color.DimGray;
             this.EnterIdentificator_TB.Location = new System.Drawing.Point(12, 303);
             this.EnterIdentificator_TB.Name = "EnterIdentificator_TB";
+            this.EnterIdentificator_TB.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
             this.EnterIdentificator_TB.Size = new System.Drawing.Size(350, 31);
             this.EnterIdentificator_TB.TabIndex = 2;
             this.EnterIdentificator_TB.Text = "Enter identificator name";

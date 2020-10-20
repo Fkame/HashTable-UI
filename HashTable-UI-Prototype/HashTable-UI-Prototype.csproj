@@ -59,12 +59,19 @@
     <Compile Include="MainMenu.Designer.cs">
       <DependentUpon>MainMenu.cs</DependentUpon>
     </Compile>
+    <Compile Include="SubForms\HintForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SubForms\HintForm.Designer.cs">
+      <DependentUpon>HintForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="SubForms\Home_Form.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="SubForms\Home_Form.Designer.cs">
       <DependentUpon>Home_Form.cs</DependentUpon>
     </Compile>
+    <Compile Include="SubForms\IFormWithHint.cs" />
     <Compile Include="SubForms\SearchForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -99,6 +106,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="MainMenu.resx">
       <DependentUpon>MainMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SubForms\HintForm.resx">
+      <DependentUpon>HintForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SubForms\Home_Form.resx">
       <DependentUpon>Home_Form.cs</DependentUpon>

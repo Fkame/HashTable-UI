@@ -13,8 +13,20 @@ using HashTableApp.HashTableStructure.ReHashFunctions;
 
 namespace HashTable_UI_Prototype.SubForms
 {
-    public partial class UploadData_Form : Form
+    public partial class UploadData_Form : Form, IFormWithHint
     {
+        private string[] HINT_TEXT = {
+            "This is Upload Data form, as you can see.",
+            "\nAnother tabs will unblock since you load data.", 
+            "\nAlgo of using this form:",
+            "1. Enter separator in right bottom field. You also can enter nothing so program will using default separator.",
+            "  * Default separator will split words as lines: One identificator = one line in data file.",
+            "  * Text field supports ctrl+A combination to pick out all text in field.",
+            "2. Click on middle bottom button and choose file with data.",
+            "\nAfter that you can go to next tab.",
+            "\n~~~Close this window to continue~~~"
+        };
+
         public static Color HIGHLIGHT_COLOR = Color.FromArgb(161, 40, 95);
 
         private String initialListOfIdentificatorsText = "- - - Here will be list of identificators from file - - -";
@@ -347,6 +359,11 @@ namespace HashTable_UI_Prototype.SubForms
 
                 needToRecreateHashFunction = false;
             }
+        }
+
+        public string GetHintText()
+        {
+            return string.Join("\n", HINT_TEXT);
         }
     }
 }

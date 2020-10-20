@@ -10,8 +10,14 @@ using System.Windows.Forms;
 
 namespace HashTable_UI_Prototype.SubForms
 {
-    public partial class StoredDataForm : Form
+    public partial class StoredDataForm : Form, IFormWithHint
     {
+        private string[] HINT_TEXT = {
+            "This is Stored data form, as you can see.",
+            "\nHere you can see representation of every cell in hash table in table-like view.",
+            "\n~~~Close this window to continue~~~"
+        };
+
         public static Color HIGHLIGHT_COLOR = Color.FromArgb(191, 82, 48);
 
         private MainMenu parentForm;
@@ -126,6 +132,11 @@ namespace HashTable_UI_Prototype.SubForms
                 LoadDataToDataGridView();
                 CustomizeDataGridView();
             }
+        }
+
+        public string GetHintText()
+        {
+            return string.Join("\n", HINT_TEXT);
         }
     }
 }

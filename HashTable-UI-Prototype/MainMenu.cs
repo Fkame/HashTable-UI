@@ -36,6 +36,8 @@ namespace HashTable_UI_Prototype
         /// </summary>
         public HashTableForString HashTable { get; internal set; } = null;
 
+        #region Состояния дочерних форм
+
         /// <summary>
         /// Переменная используется для того, чтобы свернуть или закрыть предыдущую форму.
         /// </summary>
@@ -66,6 +68,8 @@ namespace HashTable_UI_Prototype
         /// </summary>
         private StoredDataForm storedDataForm;
 
+        #endregion
+
         /// <summary>
         /// Действия при загрузке формы:
         /// 1. Нужно создать "домашнюю" форму и поместить её на панель.
@@ -84,8 +88,13 @@ namespace HashTable_UI_Prototype
             this.DoFillActiveInPanelStaff();
 
             BlockMainButtons();
+            HighLightingOfHelpButton();
         }
 
+        /// <summary>
+        /// Метод, который уведомляет дочерние вкладки, работающие с информацией о том, что им нужно обновить информацию.
+        /// Используется, чтобы не производить обновление каждый раз при разворачивании вкладки.
+        /// </summary>
         public void NotifyAboutDataChanges()
         {
             if (this.searchForm != null) searchForm.NeedToUpdateDataBeforeShowing = true;
@@ -94,7 +103,8 @@ namespace HashTable_UI_Prototype
         }
 
         /// <summary>
-        /// 
+        /// Метод, который блокирует вкладки, которые анализирируют и работают с данными.
+        /// Вызывается, когда данные ещё не были загружены, или производится попытка их обновить
         /// </summary>
         public void BlockMainButtons()
         {
@@ -104,7 +114,8 @@ namespace HashTable_UI_Prototype
         }
 
         /// <summary>
-        /// 
+        /// Метод, который снимает блокировку с вкладок, которые анализирируют и работают с данными.
+        /// Вызывается, когда данные были загружены и хэш-таблица заполнена.
         /// </summary>
         public void UnlockMainButtons()
         {
@@ -129,7 +140,7 @@ namespace HashTable_UI_Prototype
         #region Кнопки закрытия и событие закрытия формы
 
         /// <summary>
-        /// 
+        /// Обработка нажатия на кастомную кнопку закрытия
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -139,7 +150,7 @@ namespace HashTable_UI_Prototype
         }
 
         /// <summary>
-        /// 
+        /// Анимация при наведении мыши на кнопку закрытия
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -159,7 +170,8 @@ namespace HashTable_UI_Prototype
         }
 
         /// <summary>
-        /// 
+        /// Возврат исходных размеров кнопки закрытия после анимации. 
+        /// Происходит, когда пользователь отводит мышь от элемента.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -206,7 +218,8 @@ namespace HashTable_UI_Prototype
         private (int X, int Y) coordsBeforeMove = (X: 0, Y: 0);
 
         /// <summary>
-        /// 
+        /// Метод, отвечающий за перемещение окна. Возвращает флаг в неактивное состояние.
+        /// Чтобы при движении мыши, метод, обрабатывающий его, не перемещал форму.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -216,7 +229,7 @@ namespace HashTable_UI_Prototype
         }
 
         /// <summary>
-        /// 
+        /// Организация перемещения формы за курсором при поднятом флаге, что зажата кнопка мыши.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -235,7 +248,8 @@ namespace HashTable_UI_Prototype
         }
 
         /// <summary>
-        /// 
+        /// Метод, отвечающий за перемещение окна. Активирует флаг. 
+        /// Чтобы метод, обрабатывающий движение мыши, начал перемещать форму за курсором.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>

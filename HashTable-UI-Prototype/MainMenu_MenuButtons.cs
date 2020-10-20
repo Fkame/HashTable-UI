@@ -38,6 +38,8 @@ namespace HashTable_UI_Prototype
 
             activeForm = homeForm;
             this.DoFillActiveInPanelStaff();
+
+            HighLightingOfHelpButton();
         }
 
         /// <summary>
@@ -69,6 +71,8 @@ namespace HashTable_UI_Prototype
 
             activeForm = uploadDataForm;
             this.DoFillActiveInPanelStaff();
+
+            HighLightingOfHelpButton();
         }
 
         /// <summary>
@@ -97,6 +101,8 @@ namespace HashTable_UI_Prototype
 
             activeForm = searchForm;
             this.DoFillActiveInPanelStaff();
+
+            HighLightingOfHelpButton();
         }
 
         /// <summary>
@@ -125,6 +131,8 @@ namespace HashTable_UI_Prototype
 
             activeForm = visualForm;
             this.DoFillActiveInPanelStaff();
+
+            HighLightingOfHelpButton();
         }
 
         /// <summary>
@@ -153,6 +161,8 @@ namespace HashTable_UI_Prototype
 
             activeForm = storedDataForm;
             this.DoFillActiveInPanelStaff();
+
+            HighLightingOfHelpButton();
         }
         
         /// <summary>

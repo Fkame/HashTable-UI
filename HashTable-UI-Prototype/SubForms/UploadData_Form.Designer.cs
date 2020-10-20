@@ -99,13 +99,13 @@
             // 
             this.FileName_TextBox.BackColor = System.Drawing.Color.Beige;
             this.FileName_TextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.FileName_TextBox.Font = new System.Drawing.Font("Ubuntu", 15.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
+            this.FileName_TextBox.Font = new System.Drawing.Font("Ubuntu", 12.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
             this.FileName_TextBox.ForeColor = System.Drawing.Color.DimGray;
             this.FileName_TextBox.Location = new System.Drawing.Point(12, 374);
             this.FileName_TextBox.Name = "FileName_TextBox";
             this.FileName_TextBox.ReadOnly = true;
             this.FileName_TextBox.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
-            this.FileName_TextBox.Size = new System.Drawing.Size(247, 31);
+            this.FileName_TextBox.Size = new System.Drawing.Size(247, 26);
             this.FileName_TextBox.TabIndex = 6;
             this.FileName_TextBox.Text = "File name";
             this.FileName_TextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;

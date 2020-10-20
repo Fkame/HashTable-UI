@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainMenu));
             this.Header_Panel = new System.Windows.Forms.Panel();
             this.btn_HelpPointer = new System.Windows.Forms.PictureBox();
@@ -42,6 +43,7 @@
             this.btn_UploadData = new System.Windows.Forms.Button();
             this.btn_Home = new System.Windows.Forms.Button();
             this.ChildForm_Panel = new System.Windows.Forms.Panel();
+            this.Animation_of_btn_HelpPointer = new System.Windows.Forms.Timer(this.components);
             this.Header_Panel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btn_HelpPointer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btn_Help)).BeginInit();
@@ -53,8 +55,8 @@
             // Header_Panel
             // 
             this.Header_Panel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(77)))), ((int)(((byte)(178)))), ((int)(((byte)(172)))));
-            this.Header_Panel.Controls.Add(this.btn_HelpPointer);
             this.Header_Panel.Controls.Add(this.btn_Help);
+            this.Header_Panel.Controls.Add(this.btn_HelpPointer);
             this.Header_Panel.Controls.Add(this.btn_Header);
             this.Header_Panel.Controls.Add(this.Logo_Panel);
             this.Header_Panel.Dock = System.Windows.Forms.DockStyle.Top;
@@ -70,13 +72,13 @@
             // 
             this.btn_HelpPointer.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btn_HelpPointer.BackgroundImage")));
             this.btn_HelpPointer.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.btn_HelpPointer.Dock = System.Windows.Forms.DockStyle.Right;
             this.btn_HelpPointer.Location = new System.Drawing.Point(767, 0);
             this.btn_HelpPointer.Margin = new System.Windows.Forms.Padding(0);
             this.btn_HelpPointer.Name = "btn_HelpPointer";
             this.btn_HelpPointer.Size = new System.Drawing.Size(58, 70);
             this.btn_HelpPointer.TabIndex = 5;
             this.btn_HelpPointer.TabStop = false;
+            this.btn_HelpPointer.Visible = false;
             // 
             // btn_Help
             // 
@@ -89,6 +91,7 @@
             this.btn_Help.Size = new System.Drawing.Size(75, 70);
             this.btn_Help.TabIndex = 4;
             this.btn_Help.TabStop = false;
+            this.btn_Help.Click += new System.EventHandler(this.btn_Help_Click);
             // 
             // btn_Header
             // 
@@ -225,6 +228,10 @@
             this.ChildForm_Panel.Size = new System.Drawing.Size(750, 430);
             this.ChildForm_Panel.TabIndex = 2;
             // 
+            // Animation_of_btn_HelpPointer
+            // 
+            this.Animation_of_btn_HelpPointer.Tick += new System.EventHandler(this.Animation_of_btn_HelpPointer_Tick);
+            // 
             // MainMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -265,5 +272,6 @@
         private System.Windows.Forms.PictureBox btn_HelpPointer;
         private System.Windows.Forms.PictureBox btn_Exit;
         private System.Windows.Forms.Panel ChildForm_Panel;
+        private System.Windows.Forms.Timer Animation_of_btn_HelpPointer;
     }
 }
