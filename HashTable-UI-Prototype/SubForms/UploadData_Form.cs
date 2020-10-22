@@ -72,6 +72,8 @@ namespace HashTable_UI_Prototype.SubForms
             EnterSeparator_TextBox.Text = initialSeparatorFieldText;
 
             // Списки
+            ChooseHash_CB.Items.Clear();
+            ChooseRehash_CB.Items.Clear();
             ChooseHash_CB.Text = initialChooseHash_CB_Text;
             ChooseRehash_CB.Text = initialChooseRehash_CB_Text;
             ChooseHash_CB.Items.AddRange(hashes);
